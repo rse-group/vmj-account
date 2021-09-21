@@ -1,3 +1,0 @@
-module bankacc.account.core{
-    
-}

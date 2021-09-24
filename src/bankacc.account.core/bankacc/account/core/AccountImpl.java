@@ -11,7 +11,7 @@ public class AccountImpl extends AccountComponent {
     }
 
     public int withdraw(int x){
-        if (balance-x>0){
+        if (update(x)){
         int a = super.withdraw(x);
         return a;
         }

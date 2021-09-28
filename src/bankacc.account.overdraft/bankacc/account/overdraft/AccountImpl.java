@@ -22,9 +22,6 @@ public class AccountImpl extends AccountDecorator{
         return balance;
     }   
 
-    public int deposit(int x){
-        return super.deposit(x);
-    }
     public boolean update(int x) {
 		int newBalance = balance - x;
 		if (newBalance < OVERDRAFT_LIMIT)

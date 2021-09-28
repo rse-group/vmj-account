@@ -4,7 +4,7 @@ public abstract class AccountComponent implements Account {
     public static int OVERDRAFT_LIMIT = 0;
 
 	//@ invariant balance >= OVERDRAFT_LIMIT;
-	public static int balance = 0;
+	public static int balance;
     protected int id;
 
     	
@@ -20,35 +20,13 @@ public abstract class AccountComponent implements Account {
         System.out.println("\nAccount "+id+" is successfully created. \nInitial balance: "+balance);
     }
 
-    public int withdraw(int x){
-        if (update(x)){
-            System.out.print("Withdraw: "+x);
-            balance = balance-x;
-            System.out.println(" | Balance: "+balance);
-        }
-        else 
-            System.out.println("Withdraw "+x+" failed, balance less than 0");
-
-        return balance;
-    }
-
-    public int deposit(int x){
-        System.out.print("Deposit: "+x);
-        balance = balance+x;
-        System.out.println(" | Balance: "+balance);
-        return balance;
-    }
-
+    public abstract int withdraw(int x);
+    public abstract int deposit(int x);
     /*@
 	 @ ensures !\result ==> balance == \old(balance);
 	 @ ensures \result ==> balance == \old(balance) + x; 
 	 @*/
-	public boolean update(int x) {
-		int newBalance = balance - x;
-		if (newBalance < OVERDRAFT_LIMIT)
-			return false;
-		else
-		    return true;
-	}
+    public abstract boolean update(int x);
 
+   
 }

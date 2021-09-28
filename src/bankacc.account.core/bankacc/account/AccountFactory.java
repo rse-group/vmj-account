@@ -7,8 +7,7 @@ import java.util.logging.Logger;
 public class AccountFactory{
     private static final Logger LOGGER = Logger.getLogger(AccountFactory.class.getName());
 
-    public AccountFactory()
-    {
+    public AccountFactory(){
 
     }
 

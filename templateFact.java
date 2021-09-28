@@ -7,13 +7,11 @@ import java.util.logging.Logger;
 public class [interfacename]Factory{
     private static final Logger LOGGER = Logger.getLogger([interfacename]Factory.class.getName());
 
-    public [interfacename]Factory()
-    {
+    public [interfacename]Factory(){
 
     }
 
-    public static [interfacename] create[interfacename](String fullyQualifiedName, Object ... base)
-    {
+    public static [interfacename] create[interfacename](String fullyQualifiedName, Object ... base){
         [interfacename] record = null;
         try {
             Class<?> clz = Class.forName(fullyQualifiedName);

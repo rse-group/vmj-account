@@ -9,5 +9,18 @@ public abstract class AccountDecorator extends AccountComponent{
         this.account = account;
     }
 
+    public int deposit(int x){
+        return  account.deposit(x);
+    }
+
+    public int withdraw(int x){
+        return  account.withdraw(x);
+    }
+
+    public boolean update(int x){
+        return  account.update(x);
+    }
+
+
 
 }

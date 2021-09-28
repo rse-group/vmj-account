@@ -1,10 +1,10 @@
 package bankacc.account.core;
 
 public abstract class AccountComponent implements Account {
-    final static int OVERDRAFT_LIMIT = 0;
+    public static int OVERDRAFT_LIMIT = 0;
 
 	//@ invariant balance >= OVERDRAFT_LIMIT;
-	int balance = 0;
+	public static int balance = 0;
     protected int id;
 
     	
@@ -17,18 +17,25 @@ public abstract class AccountComponent implements Account {
     public AccountComponent(int id, int balance) {
         this.id = id;
         this.balance = balance;
-        System.out.println("Account "+id+" is successfully created. \nInitial balance: "+balance);
+        System.out.println("\nAccount "+id+" is successfully created. \nInitial balance: "+balance);
     }
 
     public int withdraw(int x){
-        System.out.println("Withdraw: "+x);
-        balance = balance-x;
+        if (update(x)){
+            System.out.print("Withdraw: "+x);
+            balance = balance-x;
+            System.out.println(" | Balance: "+balance);
+        }
+        else 
+            System.out.println("Withdraw "+x+" failed, balance less than 0");
+
         return balance;
     }
 
     public int deposit(int x){
-        System.out.println("Deposit: "+x);
+        System.out.print("Deposit: "+x);
         balance = balance+x;
+        System.out.println(" | Balance: "+balance);
         return balance;
     }
 

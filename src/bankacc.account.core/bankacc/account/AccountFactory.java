@@ -11,8 +11,7 @@ public class AccountFactory{
 
     }
 
-    public static Account createAccount(String fullyQualifiedName, Object ... base)
-    {
+    public static Account createAccount(String fullyQualifiedName, Object ... base){
         Account record = null;
         try {
             Class<?> clz = Class.forName(fullyQualifiedName);

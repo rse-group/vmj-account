@@ -7,12 +7,7 @@ err(){
 
 function external_module()
 {
-    if [ $1 == "payment.product.charity" ]; then
-    cp external/PaymentCharity.jar $product/
-    cp external/payment.method.core.jar $product/
-    cp external/payment.method.doku.jar $product/
     echo " add external module"
-    fi
 }
 
 # function check_module()
@@ -31,7 +26,7 @@ function external_module()
 
 function validate_product()
 {
- if [ $1 == "bankacc.account.core" ];then
+ if [ $1 == "accountpl.account.core" ];then
   account=true
  fi
 }
@@ -63,7 +58,7 @@ function build_product_requirement(){
   done 
   if [ "$account" == true ]; then
     for reqprod in $req; do
-    if [[ $reqprod =~ "bankacc" ]]; then
+    if [[ $reqprod =~ "accountpl" ]]; then
     echo -e "building requirement for $mainclass: $reqprod"
     # check_module $reqprod
     javac -d classes --module-path $product $(find src/$reqprod -name "*.java") src/$reqprod/module-info.java 
@@ -84,13 +79,11 @@ function build_product_requirement(){
 
 product=$1
 mainclass=$2
-program=false
-income=false
 if [ -d "$1" ]; then rm -r $1; fi
 if [ -d "classes" ]; then rm -r classes; fi 
 if [ ! -d "lib" ]; then mkdir -p lib; fi 
 if [ -z "$mainclass" ]; then
-    if [[ $1 =~ "bankacc.product" ]];
+    if [[ $1 =~ "accountpl.product" ]];
     then err "Please specify the main class in the product" && exit;
     elif [ ! -d "src/$1" ]; then err "module does not exist" && exit;
     else build_module $product

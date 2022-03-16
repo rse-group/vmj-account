@@ -7,6 +7,6 @@ public abstract class AccountComponent implements Account{
 	public AccountComponent() {
 
 	} 
-
+	
 	public abstract Boolean update(int x);
 }

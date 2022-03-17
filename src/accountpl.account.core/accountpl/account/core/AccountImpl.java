@@ -15,7 +15,8 @@ public class AccountImpl extends AccountComponent {
 		int newBalance = balance + x;
 		if (newBalance < overdraft_limit) {
 			System.out.println("Update is failed");
-			return false;}
+			return false;
+		}
 		balance = newBalance;
 		return true;
 	}

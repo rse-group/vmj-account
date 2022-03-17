@@ -4,9 +4,9 @@ public class AccountImpl extends AccountComponent {
 	public int balance = 0;
 	public int overdraft_limit = 0;
 
-	public AccountImpl() {
-		super();
-		System.out.println("=== Basic Account ===");
+	public AccountImpl(int id) {
+		super(id);
+		System.out.println("\n=== Basic Account: "+id);
 	}
 
 	public Boolean update(int x) {

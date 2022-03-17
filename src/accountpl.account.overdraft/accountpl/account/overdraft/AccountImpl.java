@@ -10,7 +10,7 @@ public class AccountImpl extends AccountDecorator {
 	
 	public AccountImpl(AccountComponent record) {
 		super(record);
-		System.out.println("=== Overdraft Account ===");
+		System.out.println("Account: "+record.id_account+ " is updated to Overdraft Account");
 	}
 
 	public Boolean update(int x) {

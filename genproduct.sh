@@ -26,7 +26,7 @@ function external_module()
 
 function validate_product()
 {
- if [ $1 == "accountpl.account.core" ];then
+ if [ $1 == "$plname.account.core" ];then
   account=true
  fi
 }
@@ -58,7 +58,7 @@ function build_product_requirement(){
   done 
   if [ "$account" == true ]; then
     for reqprod in $req; do
-    if [[ $reqprod =~ "accountpl" ]]; then
+    if [[ $reqprod =~ "$plname" ]]; then
     echo -e "building requirement for $mainclass: $reqprod"
     # check_module $reqprod
     javac -d classes --module-path $product $(find src/$reqprod -name "*.java") src/$reqprod/module-info.java 
@@ -79,11 +79,12 @@ function build_product_requirement(){
 
 product=$1
 mainclass=$2
+plname="accountpl"
 if [ -d "$1" ]; then rm -r $1; fi
 if [ -d "classes" ]; then rm -r classes; fi 
 if [ ! -d "lib" ]; then mkdir -p lib; fi 
 if [ -z "$mainclass" ]; then
-    if [[ $1 =~ "accountpl.product" ]];
+    if [[ $1 =~ "$plname.product" ]];
     then err "Please specify the main class in the product" && exit;
     elif [ ! -d "src/$1" ]; then err "module does not exist" && exit;
     else build_module $product

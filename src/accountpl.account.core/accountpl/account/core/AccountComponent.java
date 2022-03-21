@@ -13,5 +13,5 @@ public abstract class AccountComponent implements Account{
 		this.id_account = id;
 	} 
 	
-	public abstract Boolean update(int x);
+	public abstract boolean update(int x);
 }

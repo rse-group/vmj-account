@@ -7,7 +7,7 @@ public abstract class AccountDecorator extends AccountComponent{
 		this.record = record;
 	}
 
-	public Boolean update(int x) {
+	public boolean update(int x) {
 		return record.update(x);
 	}
 }

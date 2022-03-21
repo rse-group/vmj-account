@@ -13,7 +13,7 @@ public class AccountImpl extends AccountDecorator {
 		System.out.println("Account: "+record.id_account+ " is updated to Overdraft Account");
 	}
 
-	public Boolean update(int x) {
+	public boolean update(int x) {
 		// TODO: implement this method
 		System.out.println("Add amount: "+x);
 		int newBalance = balance + x;

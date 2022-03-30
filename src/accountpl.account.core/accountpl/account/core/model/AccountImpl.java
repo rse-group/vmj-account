@@ -12,11 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-@Entity
-@Table(name="financialreport_impl")
-public class AccountImpl extends AccountComponent {
 
-    public int overdraft_limit = 0;
+@Entity(name="account_impl")
+@Table(name="account_impl")
+public class AccountImpl extends AccountComponent {
+    
+    protected int balance;
+	protected int overdraft_limit;
 
     public AccountImpl(String id) {
         super(id);
@@ -34,8 +36,16 @@ public class AccountImpl extends AccountComponent {
         this.id_account = id;
     }
 
+    public int getBalance(){
+		return this.balance;
+	}
+
+	public void setBalance(int balance){
+		this.balance=balance;
+	}
+
+
     public boolean update(int x) {
-		// TODO: implement this method
 		System.out.println("Add amount: "+x);
 		int newBalance = balance + x;
 		if (newBalance < overdraft_limit) {
@@ -46,10 +56,10 @@ public class AccountImpl extends AccountComponent {
 		return true;
 	}
 
-    @Route(url="update")
-    public HashMap<String,Object> update(VMJExchange vmjExchange){
-        HashMap<String, Object> newBalance = new HashMap<>();
-        newBalance.put("balance", "Financial Report Core");
-        return newBalance;
-    }
+    // @Route(url="update")
+    // public HashMap<String,Object> update(VMJExchange vmjExchange){
+    //     HashMap<String, Object> newBalance = new HashMap<>();
+    //     newBalance.put("balance", "Financial Report Core");
+    //     return newBalance;
+    // }
 }

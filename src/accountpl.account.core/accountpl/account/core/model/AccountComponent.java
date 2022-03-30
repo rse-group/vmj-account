@@ -11,13 +11,10 @@ import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
 
-@Entity
+@Entity(name="account_comp")
 @Table(name="account_comp")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class AccountComponent implements Account{
-
-	public int balance;
-	public int overdraft_limit;
+public abstract class AccountComponent implements Account{	
 	
 	@Id
 	public String id_account;
@@ -30,25 +27,18 @@ public abstract class AccountComponent implements Account{
 		this.id_account = id_account;
 	}
 
-	public int getBalance(){
-		return this.overdraft_limit;
-	}
-
-	public void setBalance(int balance){
-		this.balance=balance;
-	}
-
 
 	public AccountComponent() {
-		
 	}
 	
 	public AccountComponent(String id) {
 		this.id_account = id;
 	} 
 	
+	public abstract int getBalance ();
+	public abstract void setBalance (int x);
 	public abstract boolean update(int x);
-	public abstract HashMap<String,Object> update(VMJExchange vmjExchange);
+	// public abstract HashMap<String,Object> update(VMJExchange vmjExchange);
 
 	@Override
     public String toString() {
@@ -65,9 +55,9 @@ public abstract class AccountComponent implements Account{
         return accountMap;
     }
 
-    @Route(url="getBalance")
-    public HashMap<String, Object> getBalance(VMJExchange vmjExchange) {
-        return null;
-    }
+    // @Route(url="getBalance")
+    // public HashMap<String, Object> getBalance(VMJExchange vmjExchange) {
+    //     return null;
+    // }
 
 }

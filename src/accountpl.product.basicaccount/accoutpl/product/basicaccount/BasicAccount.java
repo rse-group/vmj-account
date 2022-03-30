@@ -1,4 +1,4 @@
-package accountpl.product.basic;
+package accountpl.product.basicaccount;
 import accountpl.account.core.AccountController;
 import accountpl.account.AccountControllerFactory;
 
@@ -23,6 +23,14 @@ public class BasicAccount {
 
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(accountpl.account.core.AccountComponent.class);
+		configuration.addAnnotatedClass(accountpl.account.core.AccountImpl.class);
+		//configuration.addAnnotatedClass(accountpl.account.core.AccountDecorator.class);
+		configuration.addAnnotatedClass(prices.auth.vmj.model.core.UserComponent.class);
+		configuration.addAnnotatedClass(prices.auth.vmj.model.core.UserImpl.class);
+		configuration.addAnnotatedClass(prices.auth.vmj.model.passworded.UserPasswordedImpl.class);
+		configuration.addAnnotatedClass(prices.auth.vmj.model.core.RoleComponent.class);
+		configuration.addAnnotatedClass(prices.auth.vmj.model.core.RoleImpl.class);
+		configuration.addAnnotatedClass(prices.auth.vmj.model.core.UserRoleImpl.class);
 
         configuration.buildMappings();
 		HibernateUtil.buildSessionFactory(configuration);

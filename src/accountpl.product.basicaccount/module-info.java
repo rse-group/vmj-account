@@ -1,4 +1,4 @@
-module accountpl.product.basic {
+module accountpl.product.basicaccount {
    requires vmj.object.mapper;
    requires vmj.routing.route;
    requires vmj.hibernate.integrator;

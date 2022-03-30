@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
-@Entity(name="accountimpl")
+@Entity(name="AccountImpl")
 @Table(name="account_impl")
 public class AccountImpl extends AccountComponent {
     

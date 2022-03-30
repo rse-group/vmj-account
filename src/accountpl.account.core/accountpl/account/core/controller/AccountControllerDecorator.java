@@ -1,0 +1,49 @@
+package accountpl.account.core;
+
+import java.util.*;
+
+import accountpl.account.core.AccountControllerComponent;
+import vmj.hibernate.integrator.DaoUtil;
+import vmj.routing.route.VMJExchange;
+
+public abstract class AccountControllerDecorator extends AccountControllerComponent {
+    protected AccountControllerComponent account;
+
+    public AccountControllerDecorator(AccountControllerComponent account){
+        this.account=account;
+    }
+
+    public List<HashMap<String,Object>> saveAccount(VMJExchange vmjExchange) {
+        return account.saveAccount(vmjExchange);
+    }
+
+    public Account createAccount(VMJExchange vmjExchange) {
+        return account.createAccount(vmjExchange);
+    }
+    
+    public Account createAccount(VMJExchange vmjExchange, int id) {
+        return account.createAccount(vmjExchange, id);
+    }
+
+    public HashMap<String, Object> updateAccount(VMJExchange vmjExchange) {
+        return account.updateAccount(vmjExchange);
+    }
+
+    public HashMap<String, Object> getAccount(VMJExchange vmjExchange) {
+        return account.getAccount(vmjExchange);
+    }
+
+    public List<HashMap<String,Object>> getAllAccount(VMJExchange vmjExchange) {
+        return account.getAllAccount(vmjExchange);
+    }
+    
+    public List<HashMap<String,Object>> deleteAccount(VMJExchange vmjExchange) {
+        return account.deleteAccount(vmjExchange);
+    }
+
+    public List<HashMap<String,Object>> transformAccountListToHashMap(List<Account> accountList) {
+        return account.transformAccountListToHashMap(accountlist);
+    }
+
+    
+}

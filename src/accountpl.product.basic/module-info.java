@@ -1,8 +1,8 @@
 module accountpl.product.basic {
-    requires vmj.object.mapper;
-    requires vmj.routing.route;
-    requires vmj.hibernate.integrator;
-    requires accountpl.account.core;
+   requires vmj.object.mapper;
+   requires vmj.routing.route;
+   requires vmj.hibernate.integrator;
+
 
         // need this to run hibernate
     requires net.bytebuddy;
@@ -11,6 +11,8 @@ module accountpl.product.basic {
     requires com.fasterxml.classmate;
     // https://stackoverflow.com/questions/65171364/java-and-hibernate-error-could-not-instantiate-persister-org-hibernate-persiste
     requires jdk.unsupported;
+
+    requires accountpl.account.core;
 
     
     requires prices.auth.vmj;

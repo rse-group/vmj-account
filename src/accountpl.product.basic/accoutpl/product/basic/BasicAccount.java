@@ -1,6 +1,6 @@
 package accountpl.product.basic;
-import accountpl.account.core.*;
-import accountpl.account.AccountFactory;
+import accountpl.account.core.AccountController;
+import accountpl.account.AccountControllerFactory;
 
 import vmj.routing.route.VMJServer;
 import vmj.routing.route.Router;
@@ -14,6 +14,7 @@ import prices.auth.vmj.model.UserControllerFactory;
 import prices.auth.vmj.model.RoleControllerFactory;
 import prices.auth.vmj.model.core.UserController;
 import prices.auth.vmj.model.core.RoleController;
+
 
 public class BasicAccount {
 
@@ -75,7 +76,7 @@ public class BasicAccount {
 	}
 
 	public static void createObjectsAndBindEndPoints() {
-		FinancialReportController accountCore = AccountControllerFactory
+		AccountController accountCore = AccountControllerFactory
 				.createAccountController("accountpl.account.core.AccountControllerImpl");
     
 		UserController userCore = UserControllerFactory

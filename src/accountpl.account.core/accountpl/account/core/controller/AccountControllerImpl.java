@@ -29,12 +29,19 @@ public class AccountControllerImpl extends AccountControllerComponent{
         return account;
     }
 
+    public Account createAccount(VMJExchange vmjExchange, String id) {
+        String idStr = (String) vmjExchange.getRequestBodyForm("id");
+        Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", idStr);
+        return account;
+    }
+
+
    // @Restricted(permissionName="ModifyAccountImpl")
     @Route(url="call/account/update")
     public HashMap<String, Object> updateAccount(VMJExchange vmjExchange) {
         String idStr = (String) vmjExchange.getRequestBodyForm("id");
-        //int id = Integer.parseInt(idStr);
-        Account account = accountDao.getObject(idStr);
+        int id = Integer.parseInt(idStr);
+        Account account = accountDao.getObject(id);
         String balanceStr = (String) vmjExchange.getRequestBodyForm("balance");
         account.setBalance(Integer.parseInt(balanceStr));
         accountDao.updateObject(account);
@@ -44,8 +51,8 @@ public class AccountControllerImpl extends AccountControllerComponent{
     @Route(url="call/account/detail")
     public HashMap<String, Object> getAccount(VMJExchange vmjExchange) {
         String idStr = vmjExchange.getGETParam("id");
-        //int id = Integer.parseInt(idStr);
-        Account account = accountDao.getObject(idStr);
+        int id = Integer.parseInt(idStr);
+        Account account = accountDao.getObject(id);
         System.out.println(account);
         try {
             return account.toHashMap();
@@ -76,7 +83,8 @@ public class AccountControllerImpl extends AccountControllerComponent{
     @Route(url="call/account/delete")
     public List<HashMap<String,Object>> deleteAccount(VMJExchange vmjExchange) {
         String idStr = (String) vmjExchange.getRequestBodyForm("id");
-        accountDao.deleteObject(idStr);
+        int id = Integer.parseInt(idStr);
+        accountDao.deleteObject(id);
         return getAllAccount(vmjExchange);
     }
     

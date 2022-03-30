@@ -34,8 +34,8 @@ public abstract class AccountComponent implements Account{
 		return this.overdraft_limit;
 	}
 
-	public void setBalance(){
-
+	public void setBalance(int balance){
+		this.balance=balance;
 	}
 
 
@@ -67,13 +67,7 @@ public abstract class AccountComponent implements Account{
 
     @Route(url="getBalance")
     public HashMap<String, Object> getBalance(VMJExchange vmjExchange) {
-        Object id = vmjExchange.getGETParam("id_account");
-        ArrayList<String> requiredFields = new ArrayList<>();
-        requiredFields.add("balance");
-
-        HashMap<String, Object> hasil = vmjDBUtil.getDataById("account_core", requiredFields, id.toString());
-
-        return hasil;
+        return null;
     }
 
 }

@@ -1,6 +1,5 @@
 module accountpl.account.core {
-    requires java.logging;
-	exports accountpl.account;
+  	exports accountpl.account;
     exports accountpl.account.core;
 
     requires vmj.routing.route;
@@ -8,10 +7,7 @@ module accountpl.account.core {
     requires java.naming;
     requires vmj.hibernate.integrator;
     requires java.logging;
-    requires transitive aisco.program.core;
-    requires transitive aisco.program.activity;
-    requires transitive aisco.chartofaccount.core;
     requires prices.auth.vmj;
 
-    opens acoountpl.account.core to org.hibernate.orm.core, gson;
+    opens accountpl.account.core to org.hibernate.orm.core, gson;
 }

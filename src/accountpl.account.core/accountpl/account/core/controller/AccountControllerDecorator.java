@@ -20,8 +20,8 @@ public abstract class AccountControllerDecorator extends AccountControllerCompon
     public Account createAccount(VMJExchange vmjExchange) {
         return account.createAccount(vmjExchange);
     }
-    
-    public Account createAccount(VMJExchange vmjExchange, int id) {
+
+    public Account createAccount(VMJExchange vmjExchange, String id) {
         return account.createAccount(vmjExchange, id);
     }
 
@@ -42,7 +42,7 @@ public abstract class AccountControllerDecorator extends AccountControllerCompon
     }
 
     public List<HashMap<String,Object>> transformAccountListToHashMap(List<Account> accountList) {
-        return account.transformAccountListToHashMap(accountlist);
+        return account.transformAccountListToHashMap(accountList);
     }
 
     

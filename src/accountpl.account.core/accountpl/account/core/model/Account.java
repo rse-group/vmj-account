@@ -6,5 +6,6 @@ public interface Account {
     HashMap<String,Object> update(VMJExchange vmjExchange);
     boolean update(int x);
     HashMap<String, Object> toHashMap();
+    void setBalance(int x);
     HashMap<String,Object> getBalance(VMJExchange vmjExchange);
 }

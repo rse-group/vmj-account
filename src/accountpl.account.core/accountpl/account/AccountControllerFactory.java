@@ -1,6 +1,6 @@
 package accountpl.account;
 
-import accountpl.account.core.Account;
+import accountpl.account.core.AccountController;
 import java.lang.reflect.Constructor;
 import java.util.logging.Logger;
 
@@ -12,9 +12,9 @@ public class AccountControllerFactory{
 
     }
 
-    public static AccountController createAccount(String fullyQualifiedName, Object ... base)
+    public static AccountController createAccountController(String fullyQualifiedName, Object ... base)
     {
-        Account record = null;
+        AccountController record = null;
         try {
             Class<?> clz = Class.forName(fullyQualifiedName);
             Constructor<?> constructor = clz.getDeclaredConstructors()[0];

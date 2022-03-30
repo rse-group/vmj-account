@@ -30,7 +30,7 @@ public class AccountImpl extends AccountComponent {
         return this.id_account;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id_account = id;
     }
 

@@ -8,7 +8,7 @@ import vmj.routing.route.Router;
 import vmj.hibernate.integrator.HibernateUtil;
 import org.hibernate.cfg.Configuration;
 
-import vmj.object.mapper.VMJDatabaseMapper;
+//import vmj.object.mapper.VMJDatabaseMapper;
 
 import prices.auth.vmj.model.UserControllerFactory;
 import prices.auth.vmj.model.RoleControllerFactory;
@@ -49,44 +49,43 @@ public class BasicAccount {
 		}
 	}
 
-    public static void generateTables() {
-		try {
-			System.out.println("== GENERATING TABLES ==");
-			VMJDatabaseMapper.generateTable("prices.auth.vmj.model.passworded.UserImpl", false);
-			VMJDatabaseMapper.generateTable("prices.auth.vmj.model.core.RoleImpl", false);
-			VMJDatabaseMapper.generateTable("prices.auth.vmj.model.core.UserRoleImpl", false);
-			System.out.println();
-		} catch (Exception e) {
-			System.out.println("Skipping generate tables...");
-		} catch (Error e) {
-			System.out.println("Skipping generate tables...");
-		}
-	}
+    // public static void generateTables() {
+	// 	try {
+	// 		System.out.println("== GENERATING TABLES ==");
+	// 		VMJDatabaseMapper.generateTable("prices.auth.vmj.model.passworded.UserImpl", false);
+	// 		VMJDatabaseMapper.generateTable("prices.auth.vmj.model.core.RoleImpl", false);
+	// 		VMJDatabaseMapper.generateTable("prices.auth.vmj.model.core.UserRoleImpl", false);
+	// 		System.out.println();
+	// 	} catch (Exception e) {
+	// 		System.out.println("Skipping generate tables...");
+	// 	} catch (Error e) {
+	// 		System.out.println("Skipping generate tables...");
+	// 	}
+	// }
 
-    public static void generateCRUDEndpoints() {
-		System.out.println("== CRUD ENDPOINTS ==");
-		VMJServer vmjServer = VMJServer.getInstance();
+    // public static void generateCRUDEndpoints() {
+	// 	System.out.println("== CRUD ENDPOINTS ==");
+	// 	VMJServer vmjServer = VMJServer.getInstance();
 
-		/**
-		 * AUTH BASE MODELS
-		 */
-		vmjServer.createABSCRUDEndpoint("users", "auth_user", "prices.auth.vmj.model.core.UserImpl",
-				VMJDatabaseMapper.getTableColumnsNames("prices.auth.vmj.model.core.UserImpl", false));
-		vmjServer.createABSCRUDEndpoint("users", "auth_user_passworded", "prices.auth.vmj.model.passworded.UserImpl",
-				VMJDatabaseMapper.getTableColumnsNames("prices.auth.vmj.model.passworded.UserImpl", true));
-		vmjServer.createABSCRUDEndpoint("roles", "auth_role", "prices.auth.vmj.model.core.RoleImpl",
-				VMJDatabaseMapper.getTableColumnsNames("prices.auth.vmj.model.core.RoleImpl", false));
-		vmjServer.createABSCRUDEndpoint("user-roles", "auth_user_role", "prices.auth.vmj.model.core.UserRoleImpl",
-				VMJDatabaseMapper.getTableColumnsNames("prices.auth.vmj.model.core.UserRoleImpl", false));
+	// 	/**
+	// 	 * AUTH BASE MODELS
+	// 	 */
+	// 	vmjServer.createABSCRUDEndpoint("users", "auth_user", "prices.auth.vmj.model.core.UserImpl",
+	// 			VMJDatabaseMapper.getTableColumnsNames("prices.auth.vmj.model.core.UserImpl", false));
+	// 	vmjServer.createABSCRUDEndpoint("users", "auth_user_passworded", "prices.auth.vmj.model.passworded.UserImpl",
+	// 			VMJDatabaseMapper.getTableColumnsNames("prices.auth.vmj.model.passworded.UserImpl", true));
+	// 	vmjServer.createABSCRUDEndpoint("roles", "auth_role", "prices.auth.vmj.model.core.RoleImpl",
+	// 			VMJDatabaseMapper.getTableColumnsNames("prices.auth.vmj.model.core.RoleImpl", false));
+	// 	vmjServer.createABSCRUDEndpoint("user-roles", "auth_user_role", "prices.auth.vmj.model.core.UserRoleImpl",
+	// 			VMJDatabaseMapper.getTableColumnsNames("prices.auth.vmj.model.core.UserRoleImpl", false));
 
-		System.out.println();
+	// 	System.out.println();
 
-	}
+	// }
 
 	public static void createObjectsAndBindEndPoints() {
 		AccountController accountCore = AccountControllerFactory
 				.createAccountController("accountpl.account.core.AccountControllerImpl");
-    
 		UserController userCore = UserControllerFactory
 				.createUserController("prices.auth.vmj.model.core.UserControllerImpl");
 		UserController userPassworded = UserControllerFactory

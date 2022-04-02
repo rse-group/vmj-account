@@ -12,7 +12,7 @@ public abstract class AccountControllerComponent implements AccountController {
     }
 
     public abstract Account createAccount(VMJExchange vmjexchage);
-    public abstract Account createAccount(VMJExchange vmjexchage, String id);
+   // public abstract Account createAccount(VMJExchange vmjexchage, String id);
     public abstract List<HashMap<String,Object>> saveAccount(VMJExchange vmjExchange);
     public abstract HashMap<String, Object> updateAccount(VMJExchange vmjExchange);
     public abstract HashMap<String, Object> getAccount(VMJExchange vmjExchange);

@@ -21,9 +21,9 @@ public abstract class AccountControllerDecorator extends AccountControllerCompon
         return account.createAccount(vmjExchange);
     }
 
-    public Account createAccount(VMJExchange vmjExchange, String id) {
-        return account.createAccount(vmjExchange, id);
-    }
+    // public Account createAccount(VMJExchange vmjExchange, String id) {
+    //     return account.createAccount(vmjExchange, id);
+    // }
 
     public HashMap<String, Object> updateAccount(VMJExchange vmjExchange) {
         return account.updateAccount(vmjExchange);

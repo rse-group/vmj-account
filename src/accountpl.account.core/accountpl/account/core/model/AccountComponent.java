@@ -35,8 +35,10 @@ public abstract class AccountComponent implements Account{
 		this.id_account = id;
 	} 
 	
-	public abstract int getBalance ();
+	public abstract int getBalance();
 	public abstract void setBalance (int x);
+	public abstract int getOverdraftLimit();
+	public abstract void setOverdraftLimit (int x);
 	public abstract boolean update(int x);
 	// public abstract HashMap<String,Object> update(VMJExchange vmjExchange);
 
@@ -45,6 +47,7 @@ public abstract class AccountComponent implements Account{
         return "{" +
             " id='" + getIdAccount() + "'" +
             ", balance='" + getBalance() + "'" +
+			", overdraft_limit='" + getOverdraftLimit() + "'" +
             "}";
     }
 
@@ -52,6 +55,7 @@ public abstract class AccountComponent implements Account{
         HashMap<String, Object> accountMap = new HashMap<String,Object>();
         accountMap.put("id", getIdAccount());
         accountMap.put("balance", getBalance());
+		accountMap.put("overdraft_limit", getOverdraftLimit());
         return accountMap;
     }
 

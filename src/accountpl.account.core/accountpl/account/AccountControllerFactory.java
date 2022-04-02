@@ -13,8 +13,7 @@ public class AccountControllerFactory{
     }
 
     public static AccountController createAccountController(String fullyQualifiedName, Object ... base)
-    {
-        AccountController record = null;
+    {   AccountController record = null;
         try {
             Class<?> clz = Class.forName(fullyQualifiedName);
             Constructor<?> constructor = clz.getDeclaredConstructors()[0];

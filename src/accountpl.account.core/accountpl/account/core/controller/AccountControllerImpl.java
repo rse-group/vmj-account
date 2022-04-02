@@ -24,16 +24,16 @@ public class AccountControllerImpl extends AccountControllerComponent{
     }
 
     public Account createAccount(VMJExchange vmjExchange) {
-        String id = (String) vmjExchange.getRequestBodyForm("id");
+        String id = (String) vmjExchange.getRequestBodyForm("id_account");
         Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", id);
         return account;
     }
 
-    public Account createAccount(VMJExchange vmjExchange, String id) {
-        String idStr = (String) vmjExchange.getRequestBodyForm("id");
-        Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", idStr);
-        return account;
-    }
+    // public Account createAccount(VMJExchange vmjExchange, String id) {
+    //     String idStr = (String) vmjExchange.getRequestBodyForm("id");
+    //     Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", idStr);
+    //     return account;
+    // }
 
 
    // @Restricted(permissionName="ModifyAccountImpl")

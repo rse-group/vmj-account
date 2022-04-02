@@ -40,6 +40,14 @@ public class AccountImpl extends AccountComponent {
 		return this.balance;
 	}
 
+	public void setOverdraftLimit(int x){
+		this.overdraft_limit = 0;
+	}
+
+    public int getOverdraftLimit(){
+		return 0;
+	}
+
 	public void setBalance(int balance){
 		this.balance=balance;
 	}

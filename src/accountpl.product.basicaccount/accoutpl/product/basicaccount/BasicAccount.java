@@ -1,6 +1,6 @@
 package accountpl.product.basicaccount;
-import accountpl.account.core.AccountController;
-import accountpl.account.AccountControllerFactory;
+import accountpl.account.core.AccountResource;
+import accountpl.account.AccountResourceFactory;
 
 import vmj.routing.route.VMJServer;
 import vmj.routing.route.Router;
@@ -10,10 +10,10 @@ import org.hibernate.cfg.Configuration;
 
 //import vmj.object.mapper.VMJDatabaseMapper;
 
-import prices.auth.vmj.model.UserControllerFactory;
-import prices.auth.vmj.model.RoleControllerFactory;
-import prices.auth.vmj.model.core.UserController;
-import prices.auth.vmj.model.core.RoleController;
+import prices.auth.vmj.model.UserResourceFactory;
+import prices.auth.vmj.model.RoleResourceFactory;
+import prices.auth.vmj.model.core.UserResource;
+import prices.auth.vmj.model.core.RoleResource;
 
 
 public class BasicAccount {
@@ -84,14 +84,14 @@ public class BasicAccount {
 	// }
 
 	public static void createObjectsAndBindEndPoints() {
-		AccountController accountCore = AccountControllerFactory
-				.createAccountController("accountpl.account.core.AccountControllerImpl");
-		UserController userCore = UserControllerFactory
-				.createUserController("prices.auth.vmj.model.core.UserControllerImpl");
-		UserController userPassworded = UserControllerFactory
-				.createUserController("prices.auth.vmj.model.passworded.UserPasswordedControllerDecorator", userCore);
-		RoleController roleCore = RoleControllerFactory
-				.createRoleController("prices.auth.vmj.model.core.RoleControllerImpl");
+		AccountResource accountCore = AccountResourceFactory
+				.createAccountResource("accountpl.account.core.AccountResourceImpl");
+		UserResource userCore = UserResourceFactory
+				.createUserResource("prices.auth.vmj.model.core.UserResourceImpl");
+		UserResource userPassworded = UserResourceFactory
+				.createUserResource("prices.auth.vmj.model.passworded.UserPasswordedResourceDecorator", userCore);
+		RoleResource roleCore = RoleResourceFactory
+				.createRoleResource("prices.auth.vmj.model.core.RoleResourceImpl");
 
 		System.out.println();
 

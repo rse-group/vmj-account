@@ -4,7 +4,7 @@ import java.util.*;
 
 import vmj.routing.route.VMJExchange;
 
-public interface AccountController {
+public interface AccountResource {
     List<HashMap<String,Object>> saveAccount(VMJExchange vmjExchange);
     HashMap<String, Object> updateAccount(VMJExchange vmjExchange);
     HashMap<String, Object> getAccount(VMJExchange vmjExchange);

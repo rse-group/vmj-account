@@ -1,6 +1,6 @@
 package accountpl.account.core;
 
-import accountpl.account.core.AccountControllerComponent;
+import accountpl.account.core.AccountResourceComponent;
 
 import java.util.*;
 
@@ -12,7 +12,7 @@ import accountpl.account.AccountFactory;
 import prices.auth.vmj.annotations.Restricted;
 
 
-public class AccountControllerImpl extends AccountControllerComponent{
+public class AccountResourceImpl extends AccountResourceComponent{
 
    // @Restricted(permissionName="ModifyAccountImpl")
     @Route(url="call/account/save")

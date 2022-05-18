@@ -2,14 +2,14 @@ package accountpl.account.core;
 
 import java.util.*;
 
-import accountpl.account.core.AccountControllerComponent;
+import accountpl.account.core.AccountResourceComponent;
 import vmj.hibernate.integrator.DaoUtil;
 import vmj.routing.route.VMJExchange;
 
-public abstract class AccountControllerDecorator extends AccountControllerComponent {
-    protected AccountControllerComponent account;
+public abstract class AccountResourceDecorator extends AccountResourceComponent {
+    protected AccountResourceComponent account;
 
-    public AccountControllerDecorator(AccountControllerComponent account){
+    public AccountResourceDecorator(AccountResourceComponent account){
         this.account=account;
     }
 

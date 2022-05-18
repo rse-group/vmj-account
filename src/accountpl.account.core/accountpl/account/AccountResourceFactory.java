@@ -1,23 +1,23 @@
 package accountpl.account;
 
-import accountpl.account.core.AccountController;
+import accountpl.account.core.AccountResource;
 import java.lang.reflect.Constructor;
 import java.util.logging.Logger;
 
-public class AccountControllerFactory{
+public class AccountResourceFactory{
     private static final Logger LOGGER = Logger.getLogger(AccountFactory.class.getName());
 
-    public AccountControllerFactory()
+    public AccountResourceFactory()
     {
 
     }
 
-    public static AccountController createAccountController(String fullyQualifiedName, Object ... base)
-    {   AccountController record = null;
+    public static AccountResource createAccountResource(String fullyQualifiedName, Object ... base)
+    {   AccountResource record = null;
         try {
             Class<?> clz = Class.forName(fullyQualifiedName);
             Constructor<?> constructor = clz.getDeclaredConstructors()[0];
-            record = (AccountController) constructor.newInstance(base);
+            record = (AccountResource) constructor.newInstance(base);
         } 
         catch (IllegalArgumentException e)
         {

@@ -4,10 +4,10 @@ import java.util.*;
 import vmj.hibernate.integrator.DaoUtil;
 import vmj.routing.route.VMJExchange;
 
-public abstract class AccountControllerComponent implements AccountController {
+public abstract class AccountResourceComponent implements AccountResource {
     protected DaoUtil<Account> accountDao;
 
-    public AccountControllerComponent(){
+    public AccountResourceComponent(){
         this.accountDao = new DaoUtil<Account>(accountpl.account.core.AccountComponent.class);
     }
 

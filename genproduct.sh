@@ -12,7 +12,6 @@ function copy_vmj_libraries_and_their_dependencies_to_module_path() {
 
 function copy_databaseproperties() {
     cp auth.properties $product/
-    cp database.properties $product/
     cp hibernate.properties $product/
 }
 
@@ -54,19 +53,7 @@ function build_product_requirement() {
     # req=$(cat $targetpath | grep requires| awk '{print $2}' | cut -d';' -f 1 )
     req=$(cat $targetpath | grep "requires" | awk '{if ($2=="transitive") print $3; else print $2;}' | cut -d';' -f 1)
 
-    #check for vmj libraries
-    for reqexternal in $req; do
-        if [ $reqexternal == "vmj.object.mapper" ]; then
-            vmjobjectmapper=true
-        elif [ $reqexternal == "vmj.routing.route" ]; then
-            vmjroutingroute=true
-        fi
-    done
-
-    if [ "$vmjobjectmapper" == true ] && [ "$vmjroutingroute" == true ]; then
-        copy_vmj_libraries_and_their_dependencies_to_module_path
-    fi
-
+    copy_vmj_libraries_and_their_dependencies_to_module_path
     # validate
     for requ in $req; do
         validate_product $requ
@@ -75,12 +62,14 @@ function build_product_requirement() {
     if [ "$account" == true ]; then
         for reqprod in $req; do
             echo $reqprod
-            if [[ $reqprod =~ "$plname" ]] || [[ $reqprod =~ "vmj" ]]; then
+            if [[ $reqprod =~ "$plname" ]]; then
                 echo -e "building requirement for $mainclass: $reqprod"
                 #check_module $reqprod
                 javac -d cclasses --module-path $product $(find src/$reqprod -name "*.java") src/$reqprod/module-info.java
                 jar --create --file $product/$reqprod.jar -C cclasses .
                 rm -r cclasses
+            elif [[ $reqprod =~ "vmj" ]]; then
+                echo "library $reqprod was added"  
             else
                 echo "check requirement from another product line"
                 external_module $reqprod
@@ -101,7 +90,6 @@ echo $mainclass
 if [ -d "$1" ]; then rm -r $1; fi
 if [ -d "classes" ]; then rm -r classes; fi
 mkdir $1
-#copy_vmj_libraries_and_their_dependencies_to_module_path
 build_product_requirement $product
 #build_product
 copy_databaseproperties

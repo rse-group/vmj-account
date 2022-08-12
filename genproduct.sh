@@ -7,6 +7,7 @@ err(){
 
 function copy_vmj_libraries_and_their_dependencies_to_module_path() {
     cp winvmj-libraries/*.jar $product
+    echo "copy libraries"
 }
 
 function copy_databaseproperties() {
@@ -14,19 +15,17 @@ function copy_databaseproperties() {
     cp hibernate.properties $product/
 }
 
-function check_module() {
-    if [ $1 == "aisco.donation.pgateway" ]; then
-        cp external/payment.method.core.jar $product/
-        cp external/payment.method.dokudua.jar $product/
-        echo "  add external module for donation via payment gateway"
-    fi
-}
+# function check_module() {
+#     if [ $1 == "aisco.donation.pgateway" ]; then
+#         cp external/payment.method.core.jar $product/
+#         cp external/payment.method.dokudua.jar $product/
+#         echo "  add external module for donation via payment gateway"
+#     fi
+# }
 
 function validate_product() {
-    if [ $1 == "aisco.program.activity" ]; then
-        program=true
-    elif [ $1 == "aisco.financialreport.income" ]; then
-        income=true
+    if [ $1 == "$plname.account.core" ];then
+      account=true
     fi
 }
 
@@ -55,23 +54,22 @@ function build_product_requirement() {
     req=$(cat $targetpath | grep "requires" | awk '{if ($2=="transitive") print $3; else print $2;}' | cut -d';' -f 1)
 
     copy_vmj_libraries_and_their_dependencies_to_module_path
-
     # validate
     for requ in $req; do
         validate_product $requ
     done
 
-    if [ "$program" == true ] && [ "$income" == true ]; then
+    if [ "$account" == true ]; then
         for reqprod in $req; do
             echo $reqprod
-            if [[ $reqprod =~ "aisco" ]]; then
+            if [[ $reqprod =~ "$plname" ]]; then
                 echo -e "building requirement for $mainclass: $reqprod"
-                check_module $reqprod
+                #check_module $reqprod
                 javac -d cclasses --module-path $product $(find src/$reqprod -name "*.java") src/$reqprod/module-info.java
                 jar --create --file $product/$reqprod.jar -C cclasses .
                 rm -r cclasses
-			elif [[ $reqprod =~ "vmj" ]] || [[ $reqprod =~ "java" ]] || [[ $reqprod =~ "jdk" ]] || [[ $reqprod =~ "com" ]]; then
-                echo "library $reqprod was added"                
+            elif [[ $reqprod =~ "vmj" ]]; then
+                echo "library $reqprod was added"  
             else
                 echo "check requirement from another product line"
                 external_module $reqprod
@@ -86,8 +84,7 @@ function build_product_requirement() {
 
 product=$1
 mainclass=$2
-program=false
-income=false
+plname="accountpl"
 echo $product
 echo $mainclass
 if [ -d "$1" ]; then rm -r $1; fi

@@ -69,7 +69,7 @@ public class AccountResourceImpl extends AccountResourceDecorator {
 		return getAll(vmjExchange);
 	}
 
-	protected Boolean credit(int amount) {
+	protected boolean credit(int amount) {
 		// TODO: implement this method
 	}
 }

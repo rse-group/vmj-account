@@ -41,7 +41,8 @@ public class AccountImpl extends AccountComponent {
 	public void setOverdraft_limit(int overdraft_limit) {
 		this.overdraft_limit = overdraft_limit;
 	}
-	public Boolean update(int x) {
+
+	public boolean update(int x) {
 		// TODO: implement this method
 	}
 

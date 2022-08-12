@@ -42,8 +42,8 @@ public class AccountResourceImpl extends AccountResourceComponent{
 		int id = Integer.parseInt(idStr);
 		
 		Account account = AccountRepository.getObject(id);
-		account.setBalance((String) vmjExchange.getRequestBodyForm("balance");
-		account.setOverdraft_limit((String) vmjExchange.getRequestBodyForm("overdraft_limit");
+		account.setBalance((String) vmjExchange.getRequestBodyForm("balance"));
+		account.setOverdraft_limit((String) vmjExchange.getRequestBodyForm("overdraft_limit"));
 		
 		//to do: fix association attributes
 		
@@ -87,7 +87,7 @@ public class AccountResourceImpl extends AccountResourceComponent{
 		return getAllAccount(vmjExchange);
 	}
 
-	public Boolean update(int x) {
+	public boolean update(int x) {
 		// TODO: implement this method
 	}
 }

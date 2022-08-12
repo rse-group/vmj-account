@@ -71,7 +71,7 @@ public class AccountResourceImpl extends AccountResourceDecorator {
 		return getAll(vmjExchange);
 	}
 
-	protected Boolean update(int x) {
+	protected boolean update(int x) {
 		// TODO: implement this method
 	}
 }

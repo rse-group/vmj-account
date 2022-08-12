@@ -4,5 +4,5 @@ import vmj.routing.route.VMJExchange;
 import java.util.*;
 
 public interface Account {
-	public Boolean update(int x);
+	public boolean update(int x);
 }

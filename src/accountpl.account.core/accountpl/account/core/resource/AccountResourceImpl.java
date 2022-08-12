@@ -1,91 +1,93 @@
 package accountpl.account.core;
-
-import accountpl.account.core.AccountResourceComponent;
-
 import java.util.*;
 
 import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
-
 import accountpl.account.AccountFactory;
-
 import prices.auth.vmj.annotations.Restricted;
-
+//add other required packages
 
 public class AccountResourceImpl extends AccountResourceComponent{
+	protected AccountResourceComponent record;
 
-   // @Restricted(permissionName="ModifyAccountImpl")
+	// @Restriced(permission = "")
     @Route(url="call/account/save")
-    public List<HashMap<String,Object>> saveAccount(VMJExchange vmjExchange) {
-        Account account = createAccount(vmjExchange);
-        accountDao.saveObject(account);
-        System.out.println(account);
-        return getAllAccount(vmjExchange);
-    }
+    public List<HashMap<String,Object>> saveAccount(VMJExchange vmjExchange){
+		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
+			return null;
+		}
+		Account account = createAccount(vmjExchange);
+		AccountRepository.saveObject(account);
+		return getAllAccount(vmjExchange);
+	}
 
-    public Account createAccount(VMJExchange vmjExchange) {
-        String id = (String) vmjExchange.getRequestBodyForm("id_account");
-        Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", id);
-        return account;
-    }
+    public Account createAccount(VMJExchange vmjExchange){
+		int balance = (int) vmjExchange.getRequestBodyForm("balance");
+		int overdraft_limit = (int) vmjExchange.getRequestBodyForm("overdraft_limit");
+		int id_account = (int) vmjExchange.getRequestBodyForm("id_account");
+		
+		//to do: fix association attributes
+		
+		Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", balance, overdraft_limit, id_account);
+			return account;
+	}
 
-    // public Account createAccount(VMJExchange vmjExchange, String id) {
-    //     String idStr = (String) vmjExchange.getRequestBodyForm("id");
-    //     Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", idStr);
-    //     return account;
-    // }
-
-
-   // @Restricted(permissionName="ModifyAccountImpl")
+    // @Restriced(permission = "")
     @Route(url="call/account/update")
-    public HashMap<String, Object> updateAccount(VMJExchange vmjExchange) {
-        String idStr = (String) vmjExchange.getRequestBodyForm("id");
-        int id = Integer.parseInt(idStr);
-        Account account = accountDao.getObject(id);
-        String balanceStr = (String) vmjExchange.getRequestBodyForm("balance");
-        account.setBalance(Integer.parseInt(balanceStr));
-        accountDao.updateObject(account);
-        return account.toHashMap();
-    }
+    public HashMap<String, Object> updateAccount(VMJExchange vmjExchange){
+		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
+			return null;
+		}
+		String idStr = (String) vmjExchange.getRequestBodyForm("id_account");
+		int id = Integer.parseInt(idStr);
+		
+		Account account = AccountRepository.getObject(id);
+		account.setBalance((String) vmjExchange.getRequestBodyForm("balance");
+		account.setOverdraft_limit((String) vmjExchange.getRequestBodyForm("overdraft_limit");
+		
+		//to do: fix association attributes
+		
+	}
 
+	// @Restriced(permission = "")
     @Route(url="call/account/detail")
-    public HashMap<String, Object> getAccount(VMJExchange vmjExchange) {
-        String idStr = vmjExchange.getGETParam("id");
-        int id = Integer.parseInt(idStr);
-        Account account = accountDao.getObject(id);
-        System.out.println(account);
-        try {
-            return account.toHashMap();
-        } catch (NullPointerException e) {
-            HashMap<String, Object> blank = new HashMap<>();
-            blank.put("error", "Missing GET Params");
-            return blank;
-        }
-    }
+    public HashMap<String, Object> getAccount(VMJExchange vmjExchange){
+		String idStr = vmjExchange.getGETParam("id_account"); 
+		int id = Integer.parseInt(idStr);
+		Account account = AccountRepository.getObject(id);
+		return account.toHashMap();
+	}
 
+	// @Restriced(permission = "")
     @Route(url="call/account/list")
-    public List<HashMap<String,Object>> getAllAccount(VMJExchange vmjExchange) {
-        List<Account> accountList = accountDao.getAllObject("AccountImpl");
-        return transformAccountListToHashMap(accountList);
-    }
+    public List<HashMap<String,Object>> getAllAccount(VMJExchange vmjExchange){
+		List<Account> AccountList = AccountRepository.getAllObject("account_impl");
+		return transformAccountListToHashMap(AccountList);
+	}
 
-    // TODO: bisa dimasukin ke kelas util
-    public List<HashMap<String,Object>> transformAccountListToHashMap(List<Account> accountList) {
-        List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String,Object>>();
-        for(int i = 0; i < accountList.size(); i++) {
-            resultList.add(accountList.get(i).toHashMap());
+    public List<HashMap<String,Object>> transformAccountListToHashMap(List<Account> AccountList){
+		List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String,Object>>();
+        for(int i = 0; i < AccountList.size(); i++) {
+            resultList.add(AccountList.get(i).toHashMap());
         }
 
         return resultList;
-    }
+	}
 
-   // @Restricted(permissionName="ModifyAccountImpl")
+	// @Restriced(permission = "")
     @Route(url="call/account/delete")
-    public List<HashMap<String,Object>> deleteAccount(VMJExchange vmjExchange) {
-        String idStr = (String) vmjExchange.getRequestBodyForm("id");
-        int id = Integer.parseInt(idStr);
-        accountDao.deleteObject(id);
-        return getAllAccount(vmjExchange);
-    }
-    
+    public List<HashMap<String,Object>> deleteAccount(VMJExchange vmjExchange){
+		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
+			return null;
+		}
+		
+		String idStr = (String) vmjExchange.getRequestBodyForm("id_account");
+		int id = Integer.parseInt(idStr);
+		AccountRepository.deleteObject(id);
+		return getAllAccount(vmjExchange);
+	}
+
+	public Boolean update(int x) {
+		// TODO: implement this method
+	}
 }

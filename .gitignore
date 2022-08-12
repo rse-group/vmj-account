@@ -1,0 +1,10 @@
+outDir
+**/*.class
+javaFiles.txt
+# **/*.db
+# **/*.jar
+*.product.*/*.jar
+.idea
+*.db
+.vscode
+aisco.product.*

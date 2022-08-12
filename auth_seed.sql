@@ -29,8 +29,8 @@ INSERT INTO auth_role_comp (id) VALUES (4);
 
 INSERT INTO auth_role_impl (id,name,allowedPermissions) VALUES (1,'register','');
 INSERT INTO auth_role_impl (id,name,allowedPermissions) VALUES (2,'administrator','administrator');
-INSERT INTO auth_role_impl (id,name,allowedPermissions) VALUES (3,'staff','ModifyAccountImpl');
-INSERT INTO auth_role_impl (id,name,allowedPermissions) VALUES (4,'customer','ModifyDonationImpl');
+INSERT INTO auth_role_impl (id,name,allowedPermissions) VALUES (3,'staff','ModifyFinancialReportImpl,ModifyProgramImpl,ModifyDonationImpl');
+INSERT INTO auth_role_impl (id,name,allowedPermissions) VALUES (4,'donator','ModifyDonationImpl');
 
 INSERT INTO auth_user_role (id,authRole,authUser) VALUES (1,2,1);
 INSERT INTO auth_user_role (id,authRole,authUser) VALUES (2,3,2);

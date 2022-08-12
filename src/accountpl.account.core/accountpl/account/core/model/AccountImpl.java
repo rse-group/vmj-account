@@ -1,5 +1,6 @@
 package accountpl.account.core;
 
+import java.lang.Math;
 import java.util.*;
 import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
@@ -11,63 +12,38 @@ import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
-@Entity(name="AccountImpl")
+@Entity(name="account_impl")
 @Table(name="account_impl")
 public class AccountImpl extends AccountComponent {
-    
-    protected int balance;
+	protected int balance;
 	protected int overdraft_limit;
 
-    public AccountImpl(String id) {
-        super(id);
-    }
+	public AccountImpl(int balance, int overdraft_limit, int id_account) {
+		this.balance = balance;
+		this.overdraft_limit = overdraft_limit;
+		this.id_account = id_account;
+	}
 
-    public AccountImpl() {
-
-    }
-
-    public String getId() {
-        return this.id_account;
-    }
-
-    public void setId(String id) {
-        this.id_account = id;
-    }
-
-    public int getBalance(){
+	public int getBalance() {
 		return this.balance;
 	}
 
-	public void setOverdraftLimit(int x){
-		this.overdraft_limit = 0;
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+	public int getOverdraft_limit() {
+		return this.overdraft_limit;
 	}
 
-    public int getOverdraftLimit(){
-		return 0;
+	public void setOverdraft_limit(int overdraft_limit) {
+		this.overdraft_limit = overdraft_limit;
+	}
+	public Boolean update(int x) {
+		// TODO: implement this method
 	}
 
-	public void setBalance(int balance){
-		this.balance=balance;
-	}
-
-
-    public boolean update(int x) {
-		System.out.println("Add amount: "+x);
-		int newBalance = balance + x;
-		if (newBalance < overdraft_limit) {
-			System.out.println("Update is failed");
-			return false;
-		}
-		balance = newBalance;
-		return true;
-	}
-
-    // @Route(url="update")
-    // public HashMap<String,Object> update(VMJExchange vmjExchange){
-    //     HashMap<String, Object> newBalance = new HashMap<>();
-    //     newBalance.put("balance", "Financial Report Core");
-    //     return newBalance;
-    // }
 }
+

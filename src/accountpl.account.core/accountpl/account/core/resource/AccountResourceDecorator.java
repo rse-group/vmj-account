@@ -1,49 +1,45 @@
 package accountpl.account.core;
-
 import java.util.*;
 
-import accountpl.account.core.AccountResourceComponent;
-import vmj.hibernate.integrator.DaoUtil;
+import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 
-public abstract class AccountResourceDecorator extends AccountResourceComponent {
-    protected AccountResourceComponent account;
+public abstract class AccountResourceDecorator extends AccountResourceComponent{
+	protected AccountResourceComponent record;
 
-    public AccountResourceDecorator(AccountResourceComponent account){
-        this.account=account;
+    public AccountResourceDecorator(AccountResourceComponent record) {
+        this.record = record;
     }
 
-    public List<HashMap<String,Object>> saveAccount(VMJExchange vmjExchange) {
-        return account.saveAccount(vmjExchange);
-    }
+    public List<HashMap<String,Object>> saveAccount(VMJExchange vmjExchange){
+		return record.saveAccount(VMJExchange vmjExchange)
+	}
 
-    public Account createAccount(VMJExchange vmjExchange) {
-        return account.createAccount(vmjExchange);
-    }
+    public Account createAccount(VMJExchange vmjExchange){
+		return record.createAccount(VMJExchange vmjExchange)
+	}
 
-    // public Account createAccount(VMJExchange vmjExchange, String id) {
-    //     return account.createAccount(vmjExchange, id);
-    // }
+    public HashMap<String, Object> updateAccount(VMJExchange vmjExchange){
+		return record.updateAccount(VMJExchange vmjExchange)
+	}
 
-    public HashMap<String, Object> updateAccount(VMJExchange vmjExchange) {
-        return account.updateAccount(vmjExchange);
-    }
+    public HashMap<String, Object> getAccount(VMJExchange vmjExchange){
+		return record.getAccount(VMJExchange vmjExchange)
+	}
 
-    public HashMap<String, Object> getAccount(VMJExchange vmjExchange) {
-        return account.getAccount(vmjExchange);
-    }
+    public List<HashMap<String,Object>> getAllAccount(VMJExchange vmjExchange){
+		return record.getAllAccount(VMJExchange vmjExchange)
+	}
 
-    public List<HashMap<String,Object>> getAllAccount(VMJExchange vmjExchange) {
-        return account.getAllAccount(vmjExchange);
-    }
-    
-    public List<HashMap<String,Object>> deleteAccount(VMJExchange vmjExchange) {
-        return account.deleteAccount(vmjExchange);
-    }
+    public List<HashMap<String,Object>> transformAccountListToHashMap(List<Account> AccountList){
+		return record.transformAccountListToHashMap(List<Account> AccountList)
+	}
 
-    public List<HashMap<String,Object>> transformAccountListToHashMap(List<Account> accountList) {
-        return account.transformAccountListToHashMap(accountList);
-    }
+    public List<HashMap<String,Object>> deleteAccount(VMJExchange vmjExchange){
+		return record.deleteAccount(VMJExchange vmjExchange)
+	}
 
-    
+	public Boolean update(int x) {
+		return record.update(x);
+	}
 }

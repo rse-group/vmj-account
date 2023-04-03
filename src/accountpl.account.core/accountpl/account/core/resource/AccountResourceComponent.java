@@ -6,10 +6,10 @@ import vmj.routing.route.VMJExchange;
 //add other required packages
 
 public abstract class AccountResourceComponent implements AccountResource{
-	protected RepositoryUtil<Account> AccountRepository;
+	protected RepositoryUtil<Account> accountRepository;
 
     public AccountResourceComponent(){
-        this.AccountRepository = new RepositoryUtil<Account>(accountpl.account.core.AccountComponent.class);
+        this.accountRepository = new RepositoryUtil<Account>(accountpl.account.core.AccountComponent.class);
     }	
 
     public abstract List<HashMap<String,Object>> saveAccount(VMJExchange vmjExchange);

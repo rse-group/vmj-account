@@ -1,6 +1,6 @@
 package accountpl.account;
 
-import accountpl.account.core.Account;
+import accountpl.account.core.AccountResource;
 import java.lang.reflect.Constructor;
 import java.util.logging.Logger;
 
@@ -12,13 +12,13 @@ public class AccountResourceFactory{
 
     }
 
-    public static Account createAccountResource(String fullyQualifiedName, Object ... base)
+    public static AccountResource createAccountResource(String fullyQualifiedName, Object ... base)
     {
-        Account record = null;
+        AccountResource record = null;
         try {
             Class<?> clz = Class.forName(fullyQualifiedName);
             Constructor<?> constructor = clz.getDeclaredConstructors()[0];
-            record = (Account) constructor.newInstance(base);
+            record = (AccountResource) constructor.newInstance(base);
         } 
         catch (IllegalArgumentException e)
         {

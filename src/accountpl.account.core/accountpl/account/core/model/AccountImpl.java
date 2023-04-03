@@ -43,7 +43,7 @@ public class AccountImpl extends AccountComponent {
 	}
 
 	public boolean update(int x) {
-		// TODO: implement this method
+		return true;
 	}
 
 }

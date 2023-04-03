@@ -68,7 +68,7 @@ public class BasicAccount {
 		
 		Router.route(userPassworded);
 		Router.route(roleCore);
-		System.out.println();
+		System.out.println("good");
 	}
 
 }

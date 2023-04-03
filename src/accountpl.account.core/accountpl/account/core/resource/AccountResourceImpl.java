@@ -17,7 +17,7 @@ public class AccountResourceImpl extends AccountResourceComponent{
 			return null;
 		}
 		Account account = createAccount(vmjExchange);
-		AccountRepository.saveObject(account);
+		accountRepository.saveObject(account);
 		return getAllAccount(vmjExchange);
 	}
 
@@ -40,12 +40,19 @@ public class AccountResourceImpl extends AccountResourceComponent{
 		}
 		String idStr = (String) vmjExchange.getRequestBodyForm("id_account");
 		int id = Integer.parseInt(idStr);
-		
-		Account account = AccountRepository.getObject(id);
-		account.setBalance((String) vmjExchange.getRequestBodyForm("balance"));
-		account.setOverdraft_limit((String) vmjExchange.getRequestBodyForm("overdraft_limit"));
+		Account account = accountRepository.getObject(id);
+
+		String balanceStr = (String) vmjExchange.getRequestBodyForm("balance");
+		account.setBalance(Integer.parseInt(balanceStr));
+		String overdraftlimitStr = (String) vmjExchange.getRequestBodyForm("overdraft_limit");
+		account.setOverdraft_limit(Integer.parseInt(overdraftlimitStr));
 		
 		//to do: fix association attributes
+
+		accountRepository.updateObject(account);
+
+		account = accountRepository.getObject(id);
+        return account.toHashMap();
 		
 	}
 
@@ -54,14 +61,14 @@ public class AccountResourceImpl extends AccountResourceComponent{
     public HashMap<String, Object> getAccount(VMJExchange vmjExchange){
 		String idStr = vmjExchange.getGETParam("id_account"); 
 		int id = Integer.parseInt(idStr);
-		Account account = AccountRepository.getObject(id);
+		Account account = accountRepository.getObject(id);
 		return account.toHashMap();
 	}
 
 	// @Restriced(permission = "")
     @Route(url="call/account/list")
     public List<HashMap<String,Object>> getAllAccount(VMJExchange vmjExchange){
-		List<Account> AccountList = AccountRepository.getAllObject("account_impl");
+		List<Account> AccountList = accountRepository.getAllObject("account_impl");
 		return transformAccountListToHashMap(AccountList);
 	}
 
@@ -83,11 +90,11 @@ public class AccountResourceImpl extends AccountResourceComponent{
 		
 		String idStr = (String) vmjExchange.getRequestBodyForm("id_account");
 		int id = Integer.parseInt(idStr);
-		AccountRepository.deleteObject(id);
+		accountRepository.deleteObject(id);
 		return getAllAccount(vmjExchange);
 	}
 
 	public boolean update(int x) {
-		// TODO: implement this method
+		return true;
 	}
 }

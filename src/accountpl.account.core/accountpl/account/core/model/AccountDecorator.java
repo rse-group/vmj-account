@@ -40,5 +40,8 @@ public abstract class AccountDecorator extends AccountComponent{
 		return record.update(x);
 	}
 
+	public HashMap<String, Object> toHashMap() {
+        return this.record.toHashMap();
+    }
 }
 

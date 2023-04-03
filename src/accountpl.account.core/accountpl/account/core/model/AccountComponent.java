@@ -30,5 +30,18 @@ public abstract class AccountComponent implements Account{
 		this.id_account = id_account;
 	}
  
+	public abstract int getBalance();
+	public abstract void setBalance(int balance);
+	public abstract int getOverdraft_limit();
+	public abstract void setOverdraft_limit(int overdraft_limit);
 	public abstract boolean update(int x);
+
+	
+    public HashMap<String, Object> toHashMap() {
+        HashMap<String, Object> accountMap = new HashMap<String,Object>();
+        accountMap.put("id_account", getId_account());
+        accountMap.put("balance", getBalance());
+        accountMap.put("overdraft_limit", getOverdraft_limit());
+        return accountMap;
+    }
 }

@@ -17,6 +17,17 @@ public abstract class AccountDecorator extends AccountComponent{
 		this.record = record;
 	}
 
+	public AccountDecorator(int id_account, AccountComponent record) {
+        this.id_account= id_account;
+        this.record = record;
+    }
+
+    public AccountDecorator() {
+        super();
+        Random r = new Random();
+		this.id_account = Math.abs(r.nextInt());
+    }
+
 	public int getBalance() {
 		return record.getBalance();
 	}

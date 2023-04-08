@@ -36,6 +36,15 @@ public abstract class AccountComponent implements Account{
 	public abstract void setOverdraft_limit(int overdraft_limit);
 	public abstract boolean update(int x);
 
+	@Override
+    public String toString() {
+        return "{" +
+            " id_account='" + getId_account() + "'" +
+            ", balance='" + getBalance() + "'" +
+            ", overdraft_limit='" + getOverdraft_limit() + "'" +
+            "}";
+    }
+
 	
     public HashMap<String, Object> toHashMap() {
         HashMap<String, Object> accountMap = new HashMap<String,Object>();

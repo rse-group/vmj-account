@@ -27,6 +27,14 @@ public class AccountImpl extends AccountComponent {
 		this.id_account = id_account;
 	}
 
+	public AccountImpl()
+	{
+		Random r = new Random();
+		this.id_account = Math.abs(r.nextInt());
+        this.balance = 0;
+        this.overdraft_limit = 0;
+	}
+
 	public int getBalance() {
 		return this.balance;
 	}

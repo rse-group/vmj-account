@@ -19,6 +19,10 @@ public abstract class AccountResourceDecorator extends AccountResourceComponent{
 		return record.createAccount(vmjExchange);
 	}
 
+	public Account createAccount(VMJExchange vmjExchange, int id){
+		return record.createAccount(vmjExchange, id);
+	}
+
     public HashMap<String, Object> updateAccount(VMJExchange vmjExchange){
 		return record.updateAccount(vmjExchange);
 	}

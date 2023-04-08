@@ -8,7 +8,6 @@ import prices.auth.vmj.annotations.Restricted;
 //add other required packages
 
 public class AccountResourceImpl extends AccountResourceComponent{
-	protected AccountResourceComponent record;
 
 	// @Restriced(permission = "")
     @Route(url="call/account/save")
@@ -22,6 +21,22 @@ public class AccountResourceImpl extends AccountResourceComponent{
 	}
 
     public Account createAccount(VMJExchange vmjExchange){
+		String balanceStr = (String) vmjExchange.getRequestBodyForm("balance");
+		int balance = Integer.parseInt(balanceStr);
+
+		String overdraft_limitStr = (String) vmjExchange.getRequestBodyForm("overdraft_limit");
+		int overdraft_limit = Integer.parseInt(overdraft_limitStr);
+
+		String idStr = (String) vmjExchange.getRequestBodyForm("id_account");
+		int id_account = Integer.parseInt(idStr);
+		
+		//to do: fix association attributes
+		
+		Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", balance, overdraft_limit, id_account);
+			return account;
+	}
+
+	public Account createAccount(VMJExchange vmjExchange, int id){
 		int balance = (int) vmjExchange.getRequestBodyForm("balance");
 		int overdraft_limit = (int) vmjExchange.getRequestBodyForm("overdraft_limit");
 		int id_account = (int) vmjExchange.getRequestBodyForm("id_account");
@@ -31,6 +46,7 @@ public class AccountResourceImpl extends AccountResourceComponent{
 		Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", balance, overdraft_limit, id_account);
 			return account;
 	}
+
 
     // @Restriced(permission = "")
     @Route(url="call/account/update")
@@ -84,10 +100,6 @@ public class AccountResourceImpl extends AccountResourceComponent{
 	// @Restriced(permission = "")
     @Route(url="call/account/delete")
     public List<HashMap<String,Object>> deleteAccount(VMJExchange vmjExchange){
-		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
-			return null;
-		}
-		
 		String idStr = (String) vmjExchange.getRequestBodyForm("id_account");
 		int id = Integer.parseInt(idStr);
 		accountRepository.deleteObject(id);

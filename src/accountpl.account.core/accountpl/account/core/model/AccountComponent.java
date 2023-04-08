@@ -45,7 +45,6 @@ public abstract class AccountComponent implements Account{
             "}";
     }
 
-	
     public HashMap<String, Object> toHashMap() {
         HashMap<String, Object> accountMap = new HashMap<String,Object>();
         accountMap.put("id_account", getId_account());

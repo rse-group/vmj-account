@@ -37,13 +37,15 @@ public class AccountResourceImpl extends AccountResourceComponent{
 	}
 
 	public Account createAccount(VMJExchange vmjExchange, int id){
-		int balance = (int) vmjExchange.getRequestBodyForm("balance");
-		int overdraft_limit = (int) vmjExchange.getRequestBodyForm("overdraft_limit");
-		int id_account = (int) vmjExchange.getRequestBodyForm("id_account");
-		
+		String balanceStr = (String) vmjExchange.getRequestBodyForm("balance");
+		int balance = Integer.parseInt(balanceStr);
+
+		String overdraft_limitStr = (String) vmjExchange.getRequestBodyForm("overdraft_limit");
+		int overdraft_limit = Integer.parseInt(overdraft_limitStr);
+
 		//to do: fix association attributes
 		
-		Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", balance, overdraft_limit, id_account);
+		Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", balance, overdraft_limit);
 			return account;
 	}
 
@@ -84,14 +86,14 @@ public class AccountResourceImpl extends AccountResourceComponent{
 	// @Restriced(permission = "")
     @Route(url="call/account/list")
     public List<HashMap<String,Object>> getAllAccount(VMJExchange vmjExchange){
-		List<Account> AccountList = accountRepository.getAllObject("account_impl");
-		return transformAccountListToHashMap(AccountList);
+		List<Account> accountList = accountRepository.getAllObject("account_impl");
+		return transformAccountListToHashMap(accountList);
 	}
 
-    public List<HashMap<String,Object>> transformAccountListToHashMap(List<Account> AccountList){
+    public List<HashMap<String,Object>> transformAccountListToHashMap(List<Account> accountList){
 		List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String,Object>>();
-        for(int i = 0; i < AccountList.size(); i++) {
-            resultList.add(AccountList.get(i).toHashMap());
+        for(int i = 0; i < accountList.size(); i++) {
+            resultList.add(accountList.get(i).toHashMap());
         }
 
         return resultList;

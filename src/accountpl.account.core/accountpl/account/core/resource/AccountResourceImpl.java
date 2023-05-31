@@ -24,15 +24,12 @@ public class AccountResourceImpl extends AccountResourceComponent{
 		String balanceStr = (String) vmjExchange.getRequestBodyForm("balance");
 		int balance = Integer.parseInt(balanceStr);
 
-		String overdraft_limitStr = (String) vmjExchange.getRequestBodyForm("overdraft_limit");
-		int overdraft_limit = Integer.parseInt(overdraft_limitStr);
-
 		String idStr = (String) vmjExchange.getRequestBodyForm("id_account");
 		int id_account = Integer.parseInt(idStr);
 		
 		//to do: fix association attributes
 		
-		Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", balance, overdraft_limit, id_account);
+		Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", balance, id_account);
 			return account;
 	}
 
@@ -40,12 +37,9 @@ public class AccountResourceImpl extends AccountResourceComponent{
 		String balanceStr = (String) vmjExchange.getRequestBodyForm("balance");
 		int balance = Integer.parseInt(balanceStr);
 
-		String overdraft_limitStr = (String) vmjExchange.getRequestBodyForm("overdraft_limit");
-		int overdraft_limit = Integer.parseInt(overdraft_limitStr);
-
 		//to do: fix association attributes
 		
-		Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", balance, overdraft_limit);
+		Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", balance);
 			return account;
 	}
 
@@ -62,9 +56,6 @@ public class AccountResourceImpl extends AccountResourceComponent{
 
 		String balanceStr = (String) vmjExchange.getRequestBodyForm("balance");
 		account.setBalance(Integer.parseInt(balanceStr));
-		String overdraftlimitStr = (String) vmjExchange.getRequestBodyForm("overdraft_limit");
-		account.setOverdraft_limit(Integer.parseInt(overdraftlimitStr));
-		
 		//to do: fix association attributes
 
 		accountRepository.updateObject(account);

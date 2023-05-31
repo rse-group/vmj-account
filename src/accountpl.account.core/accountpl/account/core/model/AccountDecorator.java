@@ -34,12 +34,7 @@ public abstract class AccountDecorator extends AccountComponent{
 	public void setBalance(int balance) {
 		record.setBalance(balance);
 	}
-	public int getOverdraft_limit() {
-		return record.getOverdraft_limit();
-	}
-	public void setOverdraft_limit(int overdraft_limit) {
-		record.setOverdraft_limit(overdraft_limit);
-	}
+
 	public int getId_account() {
 		return record.getId_account();
 	}

@@ -19,11 +19,9 @@ import javax.persistence.OneToMany;
 @Table(name="account_impl")
 public class AccountImpl extends AccountComponent {
 	protected int balance;
-	protected int overdraft_limit;
 
-	public AccountImpl(int balance, int overdraft_limit, int id_account) {
+	public AccountImpl(int balance, int id_account) {
 		this.balance = balance;
-		this.overdraft_limit = overdraft_limit;
 		this.id_account = id_account;
 	}
 
@@ -32,7 +30,6 @@ public class AccountImpl extends AccountComponent {
 		Random r = new Random();
 		this.id_account = Math.abs(r.nextInt());
         this.balance = 0;
-        this.overdraft_limit = 0;
 	}
 
 	public int getBalance() {
@@ -42,17 +39,11 @@ public class AccountImpl extends AccountComponent {
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
-	public int getOverdraft_limit() {
-		return this.overdraft_limit;
-	}
 
-	public void setOverdraft_limit(int overdraft_limit) {
-		this.overdraft_limit = overdraft_limit;
-	}
 
 	public boolean update(int x) {
 		int newBalance = balance + x;
-		if (newBalance < overdraft_limit)
+		if (newBalance < 0)
 			return false;
 		balance = newBalance;
 		return true;

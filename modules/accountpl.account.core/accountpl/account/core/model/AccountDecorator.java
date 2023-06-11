@@ -11,6 +11,8 @@ import javax.persistence.CascadeType;
 
 @MappedSuperclass
 public abstract class AccountDecorator extends AccountComponent{
+	
+    @OneToOne(cascade=CascadeType.ALL)
 	protected AccountComponent record;
 		
 	public AccountDecorator (AccountComponent record) {
@@ -42,6 +44,14 @@ public abstract class AccountDecorator extends AccountComponent{
 		record.setId_account(id_account);
 	}
 
+    public AccountComponent getRecord() {
+        return this.record;
+    }
+
+    public void setRecord(AccountComponent record) {
+        this.record = record;
+    }
+    
 	public boolean update(int x) {
 		return record.update(x);
 	}

@@ -1,54 +1,85 @@
 package accountpl.account.overdraft;
 
+import java.util.*;
+
+import vmj.routing.route.Route;
+import vmj.routing.route.VMJExchange;
+
 import accountpl.account.core.AccountResourceDecorator;
-import accountpl.account.core.AccountImpl;
+import accountpl.account.core.Account;
 import accountpl.account.core.AccountResourceComponent;
+import accountpl.account.core.AccountDecorator;
+import accountpl.account.AccountFactory;
+
+import prices.auth.vmj.annotations.Restricted;
 
 public class AccountResourceImpl extends AccountResourceDecorator {
     public AccountResourceImpl (AccountResourceComponent record) {
-        // to do implement the method
+    	super(record);
     }
 
     // @Restriced(permission = "")
     @Route(url="call/overdraft/save")
-    public List<HashMap<String,Object>> save(VMJExchange vmjExchange){
+    public List<HashMap<String,Object>> saveAccount(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
 		}
-		  = create(vmjExchange);
-		Repository.saveObject();
-		return getAll(vmjExchange);
+		Account account  = createAccount(vmjExchange);
+		accountRepository.saveObject(account);
+		return getAllAccount(vmjExchange);
 	}
 
-    public  create(VMJExchange vmjExchange){
-		int overdraft_limit = (int) vmjExchange.getRequestBodyForm("overdraft_limit);
-		AccountImpl account = (AccountImpl) vmjExchange.getRequestBodyForm("account);
+    public Account createAccount(VMJExchange vmjExchange){
+		String limitStr = (String) vmjExchange.getRequestBodyForm("balance");
+		int overdraft_limit = Integer.parseInt(limitStr);
 		
-		  = record.create(vmjExchange);
-		 deco = Factory.create("accountpl.overdraft.core.AccountImpl", overdraft_limit);
+		Account account = record.createAccount(vmjExchange);
+		Account deco = AccountFactory.createAccount("accountpl.account.overdraft.AccountImpl", account, overdraft_limit);
+			return deco;
+	}
+    
+    public Account createAccount(VMJExchange vmjExchange, int id){
+		String limitStr = (String) vmjExchange.getRequestBodyForm("balance");
+		int overdraft_limit = Integer.parseInt(limitStr);
+		
+        Account savedAccount = accountRepository.getObject(id);
+        int recordAccountId = (((AccountDecorator) savedAccount).getRecord()).getId_account();
+
+		Account account = record.createAccount(vmjExchange, recordAccountId);
+		Account deco = AccountFactory.createAccount("accountpl.account.overdraft.AccountImpl", id, account, overdraft_limit);
 			return deco;
 	}
 
     // @Restriced(permission = "")
-    @Route(url="call/overdraft/update")
-    public HashMap<String, Object> update(VMJExchange vmjExchange){
-		// to do implement the method
+    @Route(url="call/overdraft/updateAccount")
+    public HashMap<String, Object> updateAccount(VMJExchange vmjExchange){
+		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
+			return null;
+		}
+        String idStr = (String) vmjExchange.getRequestBodyForm("id_account");
+        int id = Integer.parseInt(idStr);
+		Account account = accountRepository.getObject(id);
+		account = createAccount(vmjExchange, id);
+		accountRepository.updateObject(account);
+
+		account = accountRepository.getObject(id);
+        return account.toHashMap();
 	}
 
 	// @Restriced(permission = "")
     @Route(url="call/overdraft/detail")
-    public HashMap<String, Object> get(VMJExchange vmjExchange){
-		return record.get(vmjExchange);
+    public HashMap<String, Object> getAccount(VMJExchange vmjExchange){
+		return record.getAccount(vmjExchange);
 	}
 
 	// @Restriced(permission = "")
     @Route(url="call/overdraft/list")
-    public List<HashMap<String,Object>> getAll(VMJExchange vmjExchange){
-		List<> List = Repository.getAllObject("_impl");
-		return transformListToHashMap(List);
+    public List<HashMap<String,Object>> getAllAccount(VMJExchange vmjExchange){
+		List<Account> accountList = accountRepository.getAllObject("account_overdraft");
+		return transformListAccountToHashMap(accountList);
 	}
 
-    public List<HashMap<String,Object>> transformListToHashMap(List<> List){
+    public List<HashMap<String,Object>> transformListAccountToHashMap(List<Account> List){
 		List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String,Object>>();
         for(int i = 0; i < List.size(); i++) {
             resultList.add(List.get(i).toHashMap());
@@ -59,15 +90,15 @@ public class AccountResourceImpl extends AccountResourceDecorator {
 
 	// @Restriced(permission = "")
     @Route(url="call/overdraft/delete")
-    public List<HashMap<String,Object>> delete(VMJExchange vmjExchange){
+    public List<HashMap<String,Object>> deleteAccount(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
 		}
 		
-		String idStr = (String) vmjExchange.getRequestBodyForm("");
+		String idStr = (String) vmjExchange.getRequestBodyForm("id_account");
 		int id = Integer.parseInt(idStr);
-		Repository.deleteObject(id);
-		return getAll(vmjExchange);
+		accountRepository.deleteObject(id);
+		return getAllAccount(vmjExchange);
 	}
 
 }

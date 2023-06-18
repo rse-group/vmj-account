@@ -1,14 +1,33 @@
 package accountpl.account.interest;
 
+import java.util.*;
+import vmj.routing.route.Route;
+import vmj.routing.route.VMJExchange;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Column;
+
 import accountpl.account.core.AccountDecorator;
-import accountpl.account.core.Account;
 import accountpl.account.core.AccountComponent;
 
+@Entity(name="account_interest")
+@Table(name="account_interest")
 public class AccountImpl extends AccountDecorator {
 
 	protected int interest_rate;
+	
+	public AccountImpl() {
+		super();
+	}
+	
 	public AccountImpl(AccountComponent record, int interest_rate) {
 		super(record);
+		this.interest_rate = interest_rate;
+	}
+	
+	public AccountImpl(int id, AccountComponent record, int interest_rate) {
+		super(id, record);
 		this.interest_rate = interest_rate;
 	}
 
@@ -20,4 +39,21 @@ public class AccountImpl extends AccountDecorator {
 		this.interest_rate = interest_rate;
 	}
 
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId_account() + "'" +
+            " interest_rate='" + getInterest_rate() + "'" +
+            ", record='" + getRecord() + "'" +
+            "}";
+    }
+
+    public HashMap<String, Object> toHashMap() {
+        HashMap<String, Object> accountMap = record.toHashMap();
+        accountMap.put("id_account", id_account);
+        accountMap.put("interest_rate", getInterest_rate());
+        return accountMap;
+    }
 }
+

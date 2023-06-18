@@ -9,7 +9,6 @@ import javax.persistence.Table;
 import javax.persistence.Column;
 
 import accountpl.account.core.AccountDecorator;
-import accountpl.account.core.Account;
 import accountpl.account.core.AccountComponent;
 
 @Entity(name="account_overdraft")
@@ -17,6 +16,10 @@ import accountpl.account.core.AccountComponent;
 public class AccountImpl extends AccountDecorator {
 
 	protected int overdraft_limit;
+	public AccountImpl() {
+		super();
+	}
+	
 	public AccountImpl(AccountComponent record, int overdraft_limit) {
 		super(record);
 		this.overdraft_limit = overdraft_limit;
@@ -25,10 +28,6 @@ public class AccountImpl extends AccountDecorator {
 	public AccountImpl(int id, AccountComponent record, int overdraft_limit) {
 		super(id, record);
 		this.overdraft_limit = overdraft_limit;
-	}
-	
-	public AccountImpl() {
-		super();
 	}
 
 	public int getOverdraft_limit() {
@@ -42,7 +41,7 @@ public class AccountImpl extends AccountDecorator {
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId_account() + "'" +
+            " id_account='" + getId_account() + "'" +
             " overdraft_limit='" + getOverdraft_limit() + "'" +
             ", record='" + getRecord() + "'" +
             "}";

@@ -30,7 +30,7 @@ public class AccountResourceImpl extends AccountResourceDecorator {
 	}
 
     public Account createAccount(VMJExchange vmjExchange){
-		String limitStr = (String) vmjExchange.getRequestBodyForm("balance");
+		String limitStr = (String) vmjExchange.getRequestBodyForm("overdraft_limit");
 		int overdraft_limit = Integer.parseInt(limitStr);
 		
 		Account account = record.createAccount(vmjExchange);
@@ -39,7 +39,7 @@ public class AccountResourceImpl extends AccountResourceDecorator {
 	}
     
     public Account createAccount(VMJExchange vmjExchange, int id){
-		String limitStr = (String) vmjExchange.getRequestBodyForm("balance");
+		String limitStr = (String) vmjExchange.getRequestBodyForm("overdraft_limit");
 		int overdraft_limit = Integer.parseInt(limitStr);
 		
         Account savedAccount = accountRepository.getObject(id);
@@ -76,16 +76,9 @@ public class AccountResourceImpl extends AccountResourceDecorator {
     @Route(url="call/overdraft/list")
     public List<HashMap<String,Object>> getAllAccount(VMJExchange vmjExchange){
 		List<Account> accountList = accountRepository.getAllObject("account_overdraft");
-		return transformListAccountToHashMap(accountList);
-	}
-
-    public List<HashMap<String,Object>> transformListAccountToHashMap(List<Account> List){
-		List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String,Object>>();
-        for(int i = 0; i < List.size(); i++) {
-            resultList.add(List.get(i).toHashMap());
-        }
-
-        return resultList;
+		System.out.println("tes list call");
+		System.out.println(accountList);
+		return transformAccountListToHashMap(accountList);
 	}
 
 	// @Restriced(permission = "")

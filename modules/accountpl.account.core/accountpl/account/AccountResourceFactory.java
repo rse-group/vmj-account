@@ -4,6 +4,8 @@ import accountpl.account.core.AccountResource;
 import java.lang.reflect.Constructor;
 import java.util.logging.Logger;
 
+
+
 public class AccountResourceFactory{
     private static final Logger LOGGER = Logger.getLogger(AccountFactory.class.getName());
 
@@ -15,9 +17,12 @@ public class AccountResourceFactory{
     public static AccountResource createAccountResource(String fullyQualifiedName, Object ... base)
     {
         AccountResource record = null;
+        if(true)
+        {
         try {
             Class<?> clz = Class.forName(fullyQualifiedName);
             Constructor<?> constructor = clz.getDeclaredConstructors()[0];
+            System.out.println(constructor.toString());
             record = (AccountResource) constructor.newInstance(base);
         } 
         catch (IllegalArgumentException e)
@@ -45,6 +50,12 @@ public class AccountResourceFactory{
             LOGGER.severe("Failed to create instance of Account.");
             LOGGER.severe("Given FQN: " + fullyQualifiedName);
             System.exit(50);
+        }
+        }
+        else
+        {
+            System.out.println("Config Fail");
+            System.exit(10);
         }
         return record;
     }

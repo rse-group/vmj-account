@@ -24,6 +24,12 @@ public class AccountImpl extends AccountComponent {
 		this.balance = balance;
 		this.id_account = id_account;
 	}
+	
+	public AccountImpl(int balance) {
+		Random r = new Random();
+		this.id_account = Math.abs(r.nextInt());
+		this.balance = balance;
+	}
 
 	public AccountImpl()
 	{

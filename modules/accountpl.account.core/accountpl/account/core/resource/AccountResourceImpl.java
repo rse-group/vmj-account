@@ -87,6 +87,7 @@ public class AccountResourceImpl extends AccountResourceComponent{
     @Route(url="call/account/list")
     public List<HashMap<String,Object>> getAllAccount(VMJExchange vmjExchange){
 		List<Account> accountList = accountRepository.getAllObject("account_impl");
+		System.out.println(accountList);
 		return transformAccountListToHashMap(accountList);
 	}
 

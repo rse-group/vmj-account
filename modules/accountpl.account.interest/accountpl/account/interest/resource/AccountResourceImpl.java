@@ -69,7 +69,10 @@ public class AccountResourceImpl extends AccountResourceDecorator {
 	// @Restriced(permission = "")
     @Route(url="call/interest/list")
     public List<HashMap<String,Object>> getAll(VMJExchange vmjExchange){
-		List<Account> accountList = accountRepository.getAllObject("account_overdraft");
+		List<Account> accountList = accountRepository.getAllObject("account_interest");
+		System.out.println("cek interest list");
+		System.out.println(accountList);
+		
 		return transformAccountListToHashMap(accountList);
 	}
 

@@ -4,6 +4,8 @@ import accountpl.account.core.Account;
 import java.lang.reflect.Constructor;
 import java.util.logging.Logger;
 
+
+
 public class AccountFactory{
     private static final Logger LOGGER = Logger.getLogger(AccountFactory.class.getName());
 
@@ -12,14 +14,32 @@ public class AccountFactory{
 
     }
 
+    
     public static Account createAccount(String fullyQualifiedName, Object ... base)
     {
         Account record = null;
-        try {
-            Class<?> clz = Class.forName(fullyQualifiedName);
-            Constructor<?> constructor = clz.getDeclaredConstructors()[0];
-            record = (Account) constructor.newInstance(base);
-        } 
+        if(true)
+        {
+            try {
+                Class<?> clz = Class.forName(fullyQualifiedName);
+                Constructor<?>[] constructorList = clz.getDeclaredConstructors();
+                Constructor<?> constructor = null;
+                for (int i = 0; i < constructorList.length; i++) {
+                    try {
+                        constructor = constructorList[i];
+                        System.out.println(constructor.toString());
+                        record = (Account) constructor.newInstance(base);
+                        i = constructorList.length;
+                    } catch (IllegalArgumentException e) {
+                        if (i < constructorList.length - 1) {
+                            System.out.println("Trying other constructor");
+                            continue;
+                        } else {
+                            throw e;
+                        }
+                    }
+                }
+            }
         catch (IllegalArgumentException e)
         {
             LOGGER.severe("Failed to create instance of Account.");
@@ -45,6 +65,12 @@ public class AccountFactory{
             LOGGER.severe("Failed to create instance of Account.");
             LOGGER.severe("Given FQN: " + fullyQualifiedName);
             System.exit(50);
+        }
+        }
+        else
+        {
+            System.out.println("Config Fail");
+            System.exit(10);
         }
         return record;
     }

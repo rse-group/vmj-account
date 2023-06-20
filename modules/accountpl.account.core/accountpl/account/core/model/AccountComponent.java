@@ -18,10 +18,6 @@ public abstract class AccountComponent implements Account{
 	@Id
 	protected int id_account; 
 
-	public AccountComponent() {
-
-	} 
-
 	public int getId_account() {
 		return this.id_account;
 	}

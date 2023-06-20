@@ -1,10 +1,12 @@
 package accountpl.account.core;
+
 import java.util.*;
 
 import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 
 public abstract class AccountResourceDecorator extends AccountResourceComponent{
+	
 	protected AccountResourceComponent record;
 
     public AccountResourceDecorator(AccountResourceComponent record) {

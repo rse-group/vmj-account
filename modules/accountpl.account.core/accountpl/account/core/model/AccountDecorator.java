@@ -17,6 +17,8 @@ public abstract class AccountDecorator extends AccountComponent{
 		
 	public AccountDecorator (AccountComponent record) {
 		this.record = record;
+        Random r = new Random();
+		this.id_account = Math.abs(r.nextInt());
 	}
 
 	public AccountDecorator(int id_account, AccountComponent record) {
@@ -26,22 +28,23 @@ public abstract class AccountDecorator extends AccountComponent{
 
     public AccountDecorator() {
         super();
+        this.record = new AccountImpl();
         Random r = new Random();
 		this.id_account = Math.abs(r.nextInt());
     }
 
 	public int getBalance() {
-		return record.getBalance();
+		return this.record.getBalance();
 	}
 	public void setBalance(int balance) {
-		record.setBalance(balance);
+		this.record.setBalance(balance);
 	}
 	
 	public int getId_account() {
-		return record.getId_account();
+		return this.record.getId_account();
 	}
 	public void setId_account(int id_account) {
-		record.setId_account(id_account);
+		this.record.setId_account(id_account);
 	}
 
     public AccountComponent getRecord() {

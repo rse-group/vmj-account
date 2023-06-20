@@ -15,7 +15,7 @@ import accountpl.account.core.AccountComponent;
 @Table(name="account_interest")
 public class AccountImpl extends AccountDecorator {
 
-	protected int interest_rate;
+	public int interest_rate;
 	
 	public AccountImpl() {
 		super();
@@ -43,7 +43,7 @@ public class AccountImpl extends AccountDecorator {
     @Override
     public String toString() {
         return "{" +
-            " id='" + getId_account() + "'" +
+            " id_account='" + getId_account() + "'" +
             " interest_rate='" + getInterest_rate() + "'" +
             ", record='" + getRecord() + "'" +
             "}";

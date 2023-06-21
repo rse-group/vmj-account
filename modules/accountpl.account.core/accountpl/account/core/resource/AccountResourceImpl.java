@@ -24,11 +24,9 @@ public class AccountResourceImpl extends AccountResourceComponent{
 		String balanceStr = (String) vmjExchange.getRequestBodyForm("balance");
 		int balance = Integer.parseInt(balanceStr);
 
-
 		String idStr = (String) vmjExchange.getRequestBodyForm("id_account");
 		int id_account = Integer.parseInt(idStr);
-		
-		//to do: fix association attributes
+
 		
 		Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", balance, id_account);
 			return account;
@@ -40,9 +38,6 @@ public class AccountResourceImpl extends AccountResourceComponent{
 		}
 		String balanceStr = (String) vmjExchange.getRequestBodyForm("balance");
 		int balance = Integer.parseInt(balanceStr);
-
-
-		//to do: fix association attributes
 		
 		Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", balance);
 			return account;
@@ -61,8 +56,6 @@ public class AccountResourceImpl extends AccountResourceComponent{
 
 		String balanceStr = (String) vmjExchange.getRequestBodyForm("balance");
 		account.setBalance(Integer.parseInt(balanceStr));
-
-		//to do: fix association attributes
 
 		accountRepository.updateObject(account);
 
@@ -114,24 +107,28 @@ public class AccountResourceImpl extends AccountResourceComponent{
 
     @Route(url="call/account/balanceupdate")
 	public HashMap<String,Object> updateBalance(VMJExchange vmjExchange) {
+		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
+			return null;
+		}
 		String idStr = (String) vmjExchange.getRequestBodyForm("id_account");
 		int id = Integer.parseInt(idStr);
 		Account account = accountRepository.getObject(id);
-		
-    	String amountStr = (String) vmjExchange.getRequestBodyForm("amount");
-    	int amount = Integer.parseInt(amountStr);
-    	account.update(amount);
-    	
-    	int balance = account.getBalance();
-		account.setBalance(balance+amount);
-		
-		accountRepository.updateObject(account);
+		int nowbalance = account.getBalance();
 
+		String amountStr = (String) vmjExchange.getRequestBodyForm("amount");
+		int amount = Integer.parseInt(amountStr);
+		
+		int total = nowbalance + amount;
+		if (total < 0)
+			System.out.println("Transaction Failed");
+		else {
+			System.out.println("Transaction Success");
+			account.setBalance(total);
+		}
+
+		accountRepository.updateObject(account);
 		account = accountRepository.getObject(id);
         return account.toHashMap();
 	}
-    
-	public boolean update(int x) {
-		return true;
-	}
+
 }

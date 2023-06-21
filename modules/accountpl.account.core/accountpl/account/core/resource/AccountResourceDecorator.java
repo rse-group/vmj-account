@@ -44,8 +44,4 @@ public abstract class AccountResourceDecorator extends AccountResourceComponent{
     public List<HashMap<String,Object>> deleteAccount(VMJExchange vmjExchange){
 		return record.deleteAccount(vmjExchange);
 	}
-
-	public boolean update(int x) {
-		return record.update(x);
-	}
 }

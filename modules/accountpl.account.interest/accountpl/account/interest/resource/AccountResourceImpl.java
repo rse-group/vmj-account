@@ -31,7 +31,7 @@ public class AccountResourceImpl extends AccountResourceDecorator {
 
     public Account createAccount(VMJExchange vmjExchange){
 		String interest_rateStr = (String) vmjExchange.getRequestBodyForm("interest_rate");
-        int interest_rate = Integer.parseInt(interest_rateStr);
+		double interest_rate = Double.parseDouble(interest_rateStr);
 		Account account = record.createAccount(vmjExchange);
 		Account deco = AccountFactory.createAccount("accountpl.account.interest.AccountImpl", account, interest_rate);
 			return deco;
@@ -40,7 +40,7 @@ public class AccountResourceImpl extends AccountResourceDecorator {
     
     public Account createAccount(VMJExchange vmjExchange, int id) {
 		String interest_rateStr = (String) vmjExchange.getRequestBodyForm("interest_rate");
-        int interest_rate = Integer.parseInt(interest_rateStr);
+        double interest_rate = Double.parseDouble(interest_rateStr);
         Account savedAccount = accountRepository.getObject(id);
         int recordAccountId = (((AccountDecorator) savedAccount).getRecord()).getId_account();
         Account account = record.createAccount(vmjExchange, recordAccountId);
@@ -89,7 +89,7 @@ public class AccountResourceImpl extends AccountResourceDecorator {
 		return getAllAccount(vmjExchange);
 	}
 
-	protected int calculateInterest() {	
+	protected double calculateInterest() {	
 		return 5/100;
 	}
 }

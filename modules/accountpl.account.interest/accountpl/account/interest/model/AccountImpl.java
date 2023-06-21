@@ -15,27 +15,27 @@ import accountpl.account.core.AccountComponent;
 @Table(name="account_interest")
 public class AccountImpl extends AccountDecorator {
 
-	public int interest_rate;
+	public double interest_rate;
 	
 	public AccountImpl() {
 		super();
 	}
 	
-	public AccountImpl(AccountComponent record, int interest_rate) {
+	public AccountImpl(AccountComponent record, double interest_rate) {
 		super(record);
 		this.interest_rate = interest_rate;
 	}
 	
-	public AccountImpl(int id, AccountComponent record, int interest_rate) {
+	public AccountImpl(int id, AccountComponent record, double interest_rate) {
 		super(id, record);
 		this.interest_rate = interest_rate;
 	}
 
-	public int getInterest_rate() {
+	public double getInterest_rate() {
 		return this.interest_rate;
 	}
 
-	public void setInterest_rate(int interest_rate) {
+	public void setInterest_rate(double interest_rate) {
 		this.interest_rate = interest_rate;
 	}
 

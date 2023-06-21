@@ -51,7 +51,7 @@ public class AccountResourceImpl extends AccountResourceDecorator {
 	}
 
     // @Restriced(permission = "")
-    @Route(url="call/overdraft/updateAccount")
+    @Route(url="call/overdraft/update")
     public HashMap<String, Object> updateAccount(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
@@ -92,6 +92,33 @@ public class AccountResourceImpl extends AccountResourceDecorator {
 		int id = Integer.parseInt(idStr);
 		accountRepository.deleteObject(id);
 		return getAllAccount(vmjExchange);
+	}
+    
+    @Route(url="call/overdraft/balanceupdate")
+	public HashMap<String,Object> updateBalance(VMJExchange vmjExchange) {
+		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
+			return null;
+		}
+		String idStr = (String) vmjExchange.getRequestBodyForm("id_account");
+		int id = Integer.parseInt(idStr);
+		Account account = accountRepository.getObject(id);
+		int nowbalance = account.getBalance();
+		int limit = ((accountpl.account.overdraft.AccountImpl)account).getOverdraft_limit();
+
+		String amountStr = (String) vmjExchange.getRequestBodyForm("amount");
+		int amount = Integer.parseInt(amountStr);
+		
+		int total = nowbalance + amount;
+		if (total < (0-limit))
+			System.out.println("Transaction Failed");
+		else {
+			System.out.println("Transaction Success");
+			account.setBalance(total);
+		}
+
+		accountRepository.updateObject(account);
+		account = accountRepository.getObject(id);
+        return account.toHashMap();
 	}
 
 }

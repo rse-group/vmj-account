@@ -15,10 +15,11 @@ public abstract class AccountDecorator extends AccountComponent{
     @OneToOne(cascade=CascadeType.ALL)
 	protected AccountComponent record;
 		
-	public AccountDecorator (AccountComponent record) {
+	public AccountDecorator (AccountComponent record, String objectName) {
 		this.record = record;
         Random r = new Random();
 		this.id_account = Math.abs(r.nextInt());
+		this.record.objectName = objectName;
 	}
 
 	public AccountDecorator(int id_account, AccountComponent record) {

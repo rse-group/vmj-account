@@ -1,2 +1,0 @@
-echo SELECT 'CREATE DATABASE accountpl_product_basicaccount' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'accountpl_product_basicaccount') \gexec | psql "postgresql://postgres:postgres@localhost"
-java -cp accountpl.product.basicaccount --module-path accountpl.product.basicaccount -m accountpl.product.basicaccount

@@ -22,7 +22,7 @@ public class AccountImpl extends AccountDecorator {
 	}
 	
 	public AccountImpl(AccountComponent record, int overdraft_limit) {
-		super(record);
+		super(record, AccountImpl.class.getName());
 		this.overdraft_limit = overdraft_limit;
 		this.objectName = AccountImpl.class.getName();
 		

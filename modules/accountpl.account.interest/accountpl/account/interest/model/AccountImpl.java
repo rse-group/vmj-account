@@ -19,16 +19,19 @@ public class AccountImpl extends AccountDecorator {
 	
 	public AccountImpl() {
 		super();
+		this.objectName = AccountImpl.class.getName();
 	}
 	
 	public AccountImpl(AccountComponent record, double interest_rate) {
-		super(record);
+		super(record, AccountImpl.class.getName());
 		this.interest_rate = interest_rate;
+		this.objectName = AccountImpl.class.getName();
 	}
 	
 	public AccountImpl(int id, AccountComponent record, double interest_rate) {
 		super(id, record);
 		this.interest_rate = interest_rate;
+		this.objectName = AccountImpl.class.getName();
 	}
 
 	public double getInterest_rate() {

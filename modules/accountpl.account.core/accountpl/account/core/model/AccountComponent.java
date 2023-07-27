@@ -17,6 +17,8 @@ public abstract class AccountComponent implements Account{
 	
 	@Id
 	protected int id_account; 
+	protected int balance;
+	protected String objectName = AccountImpl.class.getName();
 
 	public int getId_account() {
 		return this.id_account;
@@ -25,9 +27,16 @@ public abstract class AccountComponent implements Account{
 	public void setId_account(int id_account) {
 		this.id_account = id_account;
 	}
- 
-	public abstract int getBalance();
-	public abstract void setBalance(int balance);
+	
+
+	public int getBalance() {
+		return this.balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+
 	public abstract boolean update(int x);
 
 	@Override

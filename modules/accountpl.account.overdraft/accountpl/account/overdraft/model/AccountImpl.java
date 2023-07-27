@@ -18,16 +18,20 @@ public class AccountImpl extends AccountDecorator {
 	protected int overdraft_limit;
 	public AccountImpl() {
 		super();
+		this.objectName = AccountImpl.class.getName();
 	}
 	
 	public AccountImpl(AccountComponent record, int overdraft_limit) {
 		super(record);
 		this.overdraft_limit = overdraft_limit;
+		this.objectName = AccountImpl.class.getName();
+		
 	}
 	
 	public AccountImpl(int id, AccountComponent record, int overdraft_limit) {
 		super(id, record);
 		this.overdraft_limit = overdraft_limit;
+		this.objectName = AccountImpl.class.getName();
 	}
 
 	public int getOverdraft_limit() {

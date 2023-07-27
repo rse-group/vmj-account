@@ -18,17 +18,19 @@ import javax.persistence.OneToMany;
 @Entity(name="account_impl")
 @Table(name="account_impl")
 public class AccountImpl extends AccountComponent {
-	protected int balance;
+
 
 	public AccountImpl(int balance, int id_account) {
 		this.balance = balance;
 		this.id_account = id_account;
+		this.objectName = AccountImpl.class.getName();
 	}
 	
 	public AccountImpl(int balance) {
 		Random r = new Random();
 		this.id_account = Math.abs(r.nextInt());
 		this.balance = balance;
+		this.objectName = AccountImpl.class.getName();
 	}
 
 	public AccountImpl()
@@ -36,14 +38,7 @@ public class AccountImpl extends AccountComponent {
 		Random r = new Random();
 		this.id_account = Math.abs(r.nextInt());
         this.balance = 0;
-	}
-
-	public int getBalance() {
-		return this.balance;
-	}
-
-	public void setBalance(int balance) {
-		this.balance = balance;
+        this.objectName = AccountImpl.class.getName();
 	}
 
 

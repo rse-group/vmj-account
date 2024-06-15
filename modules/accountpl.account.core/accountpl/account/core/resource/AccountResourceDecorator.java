@@ -38,6 +38,7 @@ public abstract class AccountResourceDecorator extends AccountResourceComponent{
 	}
 
     public List<HashMap<String,Object>> transformAccountListToHashMap(List<Account> accountList){
+    	System.out.println("transformAccountListToHashMap at AccountResourceDecorator");
 		return record.transformAccountListToHashMap(accountList);
 	}
 

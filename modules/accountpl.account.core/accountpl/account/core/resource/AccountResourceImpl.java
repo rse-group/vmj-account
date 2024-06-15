@@ -85,6 +85,7 @@ public class AccountResourceImpl extends AccountResourceComponent{
 	}
 
     public List<HashMap<String,Object>> transformAccountListToHashMap(List<Account> accountList){
+    	System.out.println("Masuk transformAccountListToHashmap() at AccouintResourceImpl at Core");
 		List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String,Object>>();
         for(int i = 0; i < accountList.size(); i++) {
             resultList.add(accountList.get(i).toHashMap());

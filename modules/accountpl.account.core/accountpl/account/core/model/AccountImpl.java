@@ -35,7 +35,6 @@ public class AccountImpl extends AccountComponent {
 
 	public AccountImpl()
 	{
-		System.out.println("Masuk Z");
 		Random r = new Random();
 		this.id_account = Math.abs(r.nextInt());
         this.balance = 0;

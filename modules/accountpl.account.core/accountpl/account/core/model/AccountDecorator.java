@@ -16,7 +16,6 @@ public abstract class AccountDecorator extends AccountComponent{
 	protected AccountComponent record;
 		
 	public AccountDecorator (AccountComponent record, String objectName) {
-		System.out.println("Masuk D");
 		this.record = record;
         Random r = new Random();
 		this.id_account = Math.abs(r.nextInt());
@@ -24,18 +23,13 @@ public abstract class AccountDecorator extends AccountComponent{
 	}
 
 	public AccountDecorator(int id_account, AccountComponent record) {
-		System.out.println("Masuk E");
         this.id_account= id_account;
         this.record = record;
     }
 
     public AccountDecorator() {
         super();
-        System.out.println("Masuk F");
         this.record = new AccountImpl();
-        System.out.print("this.record at AccountDecorator MasukF: ");
-        System.out.println(this.record);
-        System.out.println(this.record.getClass().getName());
         Random r = new Random();
 		this.id_account = Math.abs(r.nextInt());
     }
@@ -67,7 +61,6 @@ public abstract class AccountDecorator extends AccountComponent{
 	}
 
 	public HashMap<String, Object> toHashMap() {
-		System.out.println("Masuk toHashMap() at AccountDecorator");
         return this.record.toHashMap();
     }
 }

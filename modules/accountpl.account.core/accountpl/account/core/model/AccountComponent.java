@@ -48,7 +48,6 @@ public abstract class AccountComponent implements Account{
     }
 
     public HashMap<String, Object> toHashMap() {
-    	System.out.println("Masuk toHashMap() at AccountComponent");
         HashMap<String, Object> accountMap = new HashMap<String,Object>();
         accountMap.put("id_account", getId_account());
         accountMap.put("balance", getBalance());

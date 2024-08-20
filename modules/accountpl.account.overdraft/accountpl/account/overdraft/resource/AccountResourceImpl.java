@@ -76,20 +76,16 @@ public class AccountResourceImpl extends AccountResourceDecorator {
     @Route(url="call/overdraft/list")
     public List<HashMap<String,Object>> getAllAccount(VMJExchange vmjExchange){
 		List<Account> accountList = accountRepository.getAllObject("account_overdraft");
-		System.out.println("tes list call");
 		System.out.println(accountList);
 		return transformAccountListToHashMap(accountList);
 	}
 	
 	public List<HashMap<String, Object>> transformAccountListToHashMap(List<Account> accList) {
-        System.out.println("Masuk transformAccountListToHashMap at DonationResourceImpl at Core");
         List<HashMap<String, Object>> resultList = new ArrayList<HashMap<String, Object>>();
         for (int i = 0; i < accList.size(); i++) {
             resultList.add(accList.get(i).toHashMap());
         }
 
-        System.out.println("Hasil resultList");
-        System.out.println(resultList);
         return resultList;
     }
 
@@ -102,8 +98,6 @@ public class AccountResourceImpl extends AccountResourceDecorator {
 		
 		String idStr = (String) vmjExchange.getRequestBodyForm("id_account");
 		int id = Integer.parseInt(idStr);
-		System.out.println("isi id adalah");
-		System.out.println(id);
 		accountRepository.deleteObject(id);
 		System.out.println(accountRepository);
 		return getAllAccount(vmjExchange);

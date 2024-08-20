@@ -18,15 +18,11 @@ public class AccountImpl extends AccountDecorator {
 	protected int overdraft_limit;
 	public AccountImpl() {
 		super();
-		System.out.println("Masuk A");
 		this.objectName = AccountImpl.class.getName();
-		System.out.print("this.objectName at MasukA: ");
-		System.out.println(AccountImpl.class.getName());
 	}
 	
 	public AccountImpl(AccountComponent record, int overdraft_limit) {
 		super(record, AccountImpl.class.getName());
-		System.out.println("Masuk B");
 		this.overdraft_limit = overdraft_limit;
 		this.objectName = AccountImpl.class.getName();
 		
@@ -34,7 +30,6 @@ public class AccountImpl extends AccountDecorator {
 	
 	public AccountImpl(int id, AccountComponent record, int overdraft_limit) {
 		super(id, record);
-		System.out.println("Masuk C");
 		this.overdraft_limit = overdraft_limit;
 		this.objectName = AccountImpl.class.getName();
 	}
@@ -57,8 +52,6 @@ public class AccountImpl extends AccountDecorator {
     }
 
     public HashMap<String, Object> toHashMap() {
-    	System.out.println("Masuk toHashMap() at AccountImpl at Overdraft");
-    	System.out.print("Record Type: ");
 		System.out.println(record.getClass().getName());
         HashMap<String, Object> accountMap = record.toHashMap();
         accountMap.put("id_account", id_account);

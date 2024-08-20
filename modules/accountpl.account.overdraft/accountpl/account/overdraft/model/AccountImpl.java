@@ -52,7 +52,6 @@ public class AccountImpl extends AccountDecorator {
     }
 
     public HashMap<String, Object> toHashMap() {
-		System.out.println(record.getClass().getName());
         HashMap<String, Object> accountMap = record.toHashMap();
         accountMap.put("id_account", id_account);
         accountMap.put("overdraft_limit", getOverdraft_limit());

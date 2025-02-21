@@ -6,5 +6,5 @@ module accountpl.account.interest {
 	requires vmj.hibernate.integrator;
 	requires prices.auth.vmj;
 
-	opens accountpl.account.interest to org.hibernate.orm.core, gson;
+	opens accountpl.account.interest to org.hibernate.orm.core, gson, vmj.hibernate.integrator;
 }

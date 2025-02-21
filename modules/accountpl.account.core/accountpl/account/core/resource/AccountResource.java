@@ -9,4 +9,6 @@ public interface AccountResource {
     HashMap<String, Object> getAccount(VMJExchange vmjExchange);
     List<HashMap<String,Object>> getAllAccount(VMJExchange vmjExchange);
     List<HashMap<String,Object>> deleteAccount(VMJExchange vmjExchange);
+    HashMap<String, Object> updateBalance(VMJExchange vmjExchange);
+    HashMap<String, Object> withdrawAccount(VMJExchange vmjExchange);
 }

@@ -4,7 +4,7 @@ import java.util.*;
 
 import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
-
+import vmj.routing.route.exceptions.*;
 import accountpl.account.core.AccountResourceDecorator;
 import accountpl.account.core.Account;
 import accountpl.account.core.AccountResourceComponent;
@@ -127,6 +127,47 @@ public class AccountResourceImpl extends AccountResourceDecorator {
 		account = accountRepository.getObject(id);
         return account.toHashMap();
 	}
+    
+    @Route(url="call/overdraft/withdraw")
+    public HashMap<String,Object> withdrawAccount(VMJExchange vmjExchange){
+    	if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
+			return null;
+		}
+    	
+    	String idSourceStr = (String) vmjExchange.getRequestBodyForm("id_account");
+    	int idSource = Integer.parseInt(idSourceStr);
+    	
+    	String idTargetStr = (String) vmjExchange.getRequestBodyForm("id_account_target");
+    	int idTarget = Integer.parseInt(idTargetStr);
+    	
+    	Account accountSource = accountRepository.getObject(idSource);
+    	Account accountTarget = accountRepository.getObject(idTarget);
+    	
+    	int balanceSource = accountSource.getBalance();
+    	int balanceTarget = accountTarget.getBalance();
+    	
+    	int limit = ((accountpl.account.overdraft.AccountImpl)accountSource).getOverdraft_limit();
+    	
+    	String amountStr = (String)vmjExchange.getRequestBodyForm("amount");
+    	
+    	int amount = Integer.parseInt(amountStr);
+    	
+        int newBalanceSource = balanceSource - amount;
+
+        if (newBalanceSource < -limit) {
+            System.out.println("Withdraw failed: Exceeds overdraft limit");
+            throw new BadRequestException("Withdraw failed: Amount exceeds overdraft limit",400,4000);
+        } else {
+            accountSource.setBalance(newBalanceSource);
+            accountTarget.setBalance(balanceTarget + amount);
+            System.out.println("Withdraw success");
+        }
+    	
+    	accountRepository.updateObject(accountSource);
+    	accountRepository.updateObject(accountTarget);
+    	accountTarget = accountRepository.getObject(idTarget);
+        return accountTarget.toHashMap();
+    }
 
 }
 

@@ -1,5 +1,5 @@
 {
-	"Account":["accountpl.account.core"],
+	"BankAccount":["accountpl.account.core"],
 	"DailyLimit":["accountpl.account.dailylimit"],
 	"Interest":["accountpl.account.interest"],
 	"Overdraft":["accountpl.account.overdraft"],

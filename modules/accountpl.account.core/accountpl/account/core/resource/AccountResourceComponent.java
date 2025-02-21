@@ -22,4 +22,5 @@ public abstract class AccountResourceComponent implements AccountResource{
     public abstract List<HashMap<String,Object>> transformAccountListToHashMap(List<Account> AccountList);
     public abstract List<HashMap<String,Object>> deleteAccount(VMJExchange vmjExchange);
     public abstract HashMap<String,Object> updateBalance(VMJExchange vmjExchange);
+    public abstract HashMap<String,Object> withdrawAccount(VMJExchange vmjExchange);
 }

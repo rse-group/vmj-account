@@ -3,6 +3,7 @@ import java.util.*;
 
 import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
+import vmj.routing.route.exceptions.*;
 import accountpl.account.AccountFactory;
 import prices.auth.vmj.annotations.Restricted;
 //add other required packages
@@ -26,8 +27,7 @@ public class AccountResourceImpl extends AccountResourceComponent{
 
 		String idStr = (String) vmjExchange.getRequestBodyForm("id_account");
 		int id_account = Integer.parseInt(idStr);
-
-		
+	
 		Account account = AccountFactory.createAccount("accountpl.account.core.AccountImpl", balance, id_account);
 			return account;
 	}
@@ -130,5 +130,43 @@ public class AccountResourceImpl extends AccountResourceComponent{
 		account = accountRepository.getObject(id);
         return account.toHashMap();
 	}
+    
+    @Route(url="call/account/withdraw")
+    public HashMap<String,Object> withdrawAccount(VMJExchange vmjExchange){
+    	if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
+			return null;
+		}
+    	
+    	String idSourceStr = (String) vmjExchange.getRequestBodyForm("id_account");
+    	int idSource = Integer.parseInt(idSourceStr);
+    	
+    	String idTargetStr = (String) vmjExchange.getRequestBodyForm("id_account_target");
+    	int idTarget = Integer.parseInt(idTargetStr);
+    	
+    	Account accountSource = accountRepository.getObject(idSource);
+    	Account accountTarget = accountRepository.getObject(idTarget);
+    	
+    	int balanceSource = accountSource.getBalance();
+    	int balanceTarget = accountTarget.getBalance();
+    	
+    	String amountStr = (String)vmjExchange.getRequestBodyForm("amount");
+    	
+    	int amount = Integer.parseInt(amountStr);
+    	
+    	if (amount > balanceSource) {
+    		System.out.println("Withdraw failed, amount exceded your balance");
+    		throw new BadRequestException("Withdraw failed, amount exceded your balance",400,4000);
+    	}
+    	else {
+    		System.out.println("Withdraw success");
+    		accountSource.setBalance(balanceSource - amount);
+    		accountTarget.setBalance(balanceTarget + amount);
+    	}
+    	
+    	accountRepository.updateObject(accountSource);
+    	accountRepository.updateObject(accountTarget);
+    	accountTarget = accountRepository.getObject(idTarget);
+        return accountTarget.toHashMap();
+    }
 
 }

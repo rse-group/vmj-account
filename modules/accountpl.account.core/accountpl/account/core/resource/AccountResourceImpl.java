@@ -1,11 +1,13 @@
 package accountpl.account.core;
 import java.util.*;
+import java.text.NumberFormat;
 
 import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 import vmj.routing.route.exceptions.*;
 import accountpl.account.AccountFactory;
 import prices.auth.vmj.annotations.Restricted;
+
 //add other required packages
 
 public class AccountResourceImpl extends AccountResourceComponent{
@@ -83,6 +85,14 @@ public class AccountResourceImpl extends AccountResourceComponent{
 		System.out.println(accountList);
 		return transformAccountListToHashMap(accountList);
 	}
+    
+    // @Restriced(permission = "")
+    @Route(url="call/account/select-options")
+    public List<HashMap<String,Object>> getAllAccountOptions(VMJExchange vmjExchange){
+		List<Account> accountList = accountRepository.getAllObject("account_impl", AccountImpl.class.getName());
+		System.out.println(accountList);
+		return transformAccountListToOptions(accountList);
+	}
 
     public List<HashMap<String,Object>> transformAccountListToHashMap(List<Account> accountList){
 		List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String,Object>>();
@@ -92,6 +102,34 @@ public class AccountResourceImpl extends AccountResourceComponent{
 
         return resultList;
 	}
+    
+    public List<HashMap<String, Object>> transformAccountListToOptions(List<Account> accountList) {
+        List<HashMap<String, Object>> optionsList = new ArrayList<>();
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+        
+        for (Account account : accountList) {
+            HashMap<String, Object> option = new HashMap<>();
+            HashMap<String, Object> accountMap = account.toHashMap();
+            
+            Object idAccount = accountMap.get("id_account");
+            Object balance = accountMap.get("balance");
+           
+
+            String formattedBalance = currencyFormatter.format(balance);
+
+            StringBuilder nameBuilder = new StringBuilder();
+            nameBuilder.append("Account ID: ").append(idAccount)
+                       .append(", Balance: ").append(formattedBalance);
+
+            option.put("id", idAccount);
+            option.put("name", nameBuilder.toString());
+
+            optionsList.add(option);
+        }
+        
+        return optionsList;
+    }
+
 
 	// @Restriced(permission = "")
     @Route(url="call/account/delete")

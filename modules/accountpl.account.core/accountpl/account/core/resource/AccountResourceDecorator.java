@@ -36,6 +36,10 @@ public abstract class AccountResourceDecorator extends AccountResourceComponent{
     public List<HashMap<String,Object>> getAllAccount(VMJExchange vmjExchange){
 		return record.getAllAccount(vmjExchange);
 	}
+    
+    public List<HashMap<String,Object>> getAllAccountOptions(VMJExchange vmjExchange){
+		return record.getAllAccountOptions(vmjExchange);
+	}
 
     public List<HashMap<String,Object>> transformAccountListToHashMap(List<Account> accountList){
 		return record.transformAccountListToHashMap(accountList);

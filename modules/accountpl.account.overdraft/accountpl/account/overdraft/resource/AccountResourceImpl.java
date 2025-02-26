@@ -1,5 +1,6 @@
 package accountpl.account.overdraft;
 
+import java.text.NumberFormat;
 import java.util.*;
 
 import vmj.routing.route.Route;
@@ -78,6 +79,13 @@ public class AccountResourceImpl extends AccountResourceDecorator {
 		List<Account> accountList = accountRepository.getAllObject("account_overdraft");
 		return transformAccountListToHashMap(accountList);
 	}
+    
+    // @Restriced(permission = "")
+    @Route(url="call/overdraft/select-options")
+    public List<HashMap<String,Object>> getAllOverdraftOptions(VMJExchange vmjExchange){
+		List<Account> accountList = accountRepository.getAllObject("account_overdraft");
+		return transformAccountListToOptions(accountList);
+	}
 	
 	public List<HashMap<String, Object>> transformAccountListToHashMap(List<Account> accList) {
         List<HashMap<String, Object>> resultList = new ArrayList<HashMap<String, Object>>();
@@ -87,6 +95,36 @@ public class AccountResourceImpl extends AccountResourceDecorator {
 
         return resultList;
     }
+	
+	 public List<HashMap<String, Object>> transformAccountListToOptions(List<Account> accountList) {
+		List<HashMap<String, Object>> optionsList = new ArrayList<>();
+		NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+		
+		for (Account account : accountList) {
+			HashMap<String, Object> option = new HashMap<>();
+			HashMap<String, Object> accountMap = account.toHashMap();
+			
+			Object idAccount = accountMap.get("id_account");
+			Object balance = accountMap.get("balance");
+			Object overdraft_limit = accountMap.get("overdraft_limit");
+			 
+			String formattedBalance = currencyFormatter.format(balance);
+			String formattedOverdraftLimit = currencyFormatter.format(overdraft_limit);
+
+			StringBuilder nameBuilder = new StringBuilder();
+			nameBuilder.append("Account ID: ").append(idAccount)
+						.append(", Balance: ").append(formattedBalance)
+						.append(", Overdraft Limit: ").append(formattedOverdraftLimit);
+
+			option.put("id", idAccount);
+			option.put("name", nameBuilder.toString());
+
+			optionsList.add(option);
+		}
+		
+		return optionsList;
+	 }
+
 
 	// @Restriced(permission = "")
     @Route(url="call/overdraft/delete")

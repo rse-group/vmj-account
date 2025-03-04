@@ -4,7 +4,7 @@ module accountpl.account.interest {
 
 	requires vmj.routing.route;
 	requires vmj.hibernate.integrator;
-	requires prices.auth.vmj;
+	requires vmj.auth;
 
 	opens accountpl.account.interest to org.hibernate.orm.core, gson, vmj.hibernate.integrator;
 }

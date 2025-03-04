@@ -12,7 +12,7 @@ import accountpl.account.core.AccountResourceComponent;
 import accountpl.account.core.AccountDecorator;
 import accountpl.account.AccountFactory;
 
-import prices.auth.vmj.annotations.Restricted;
+import vmj.auth.annotations.Restricted;
 
 public class AccountResourceImpl extends AccountResourceDecorator {
     public AccountResourceImpl (AccountResourceComponent record) {

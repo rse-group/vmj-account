@@ -11,5 +11,5 @@ public interface AccountResource {
     List<HashMap<String,Object>> getAllAccountOptions(VMJExchange vmjExchange);
     List<HashMap<String,Object>> deleteAccount(VMJExchange vmjExchange);
     HashMap<String, Object> updateBalance(VMJExchange vmjExchange);
-    HashMap<String, Object> withdrawAccount(VMJExchange vmjExchange);
+    HashMap<String, Object> transferAccount(VMJExchange vmjExchange);
 }

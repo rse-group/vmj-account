@@ -20,7 +20,10 @@ public abstract class AccountResourceComponent implements AccountResource{
     public abstract HashMap<String, Object> getAccount(VMJExchange vmjExchange);
     public abstract List<HashMap<String,Object>> getAllAccount(VMJExchange vmjExchange);
     public abstract List<HashMap<String,Object>> getAllAccountOptions(VMJExchange vmjExchange);
+    public abstract List<HashMap<String,Object>> getAllAccountIdOptions(VMJExchange vmjExchange);
     public abstract List<HashMap<String,Object>> transformAccountListToHashMap(List<Account> AccountList);
+    public abstract List<HashMap<String,Object>> transformAccountListToIdOptions(List<Account> AccountList);
+    public abstract List<HashMap<String,Object>> transformAccountListToOptions(List<Account> AccountList);
     public abstract List<HashMap<String,Object>> deleteAccount(VMJExchange vmjExchange);
     public abstract HashMap<String,Object> updateBalance(VMJExchange vmjExchange);
     public abstract HashMap<String,Object> transferAccount(VMJExchange vmjExchange);

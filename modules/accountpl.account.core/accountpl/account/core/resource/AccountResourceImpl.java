@@ -81,7 +81,6 @@ public class AccountResourceImpl extends AccountResourceComponent {
     @Route(url = "call/account/list")
     public List<HashMap<String, Object>> getAllAccount(VMJExchange vmjExchange) {
         List<Account> accountList = accountRepository.getAllObject("account_impl", AccountImpl.class.getName());
-        System.out.println(accountList);
         return transformAccountListToHashMap(accountList);
     }
 
@@ -89,8 +88,13 @@ public class AccountResourceImpl extends AccountResourceComponent {
     @Route(url = "call/account/select-options")
     public List<HashMap<String, Object>> getAllAccountOptions(VMJExchange vmjExchange) {
         List<Account> accountList = accountRepository.getAllObject("account_impl", AccountImpl.class.getName());
-        System.out.println(accountList);
         return transformAccountListToOptions(accountList);
+    }
+    
+    @Route(url = "call/account/select-options-id")
+    public List<HashMap<String, Object>> getAllAccountIdOptions(VMJExchange vmjExchange) {
+        List<Account> accountList = accountRepository.getAllObject("account_impl", AccountImpl.class.getName());
+        return transformAccountListToIdOptions(accountList);
     }
 
     public List<HashMap<String, Object>> transformAccountListToHashMap(List<Account> accountList) {
@@ -101,6 +105,29 @@ public class AccountResourceImpl extends AccountResourceComponent {
 
         return resultList;
     }
+    
+    public List<HashMap<String, Object>> transformAccountListToIdOptions(List<Account> accountList) {
+        List<HashMap<String, Object>> optionsList = new ArrayList<>();
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+
+        for (Account account : accountList) {
+            HashMap<String, Object> option = new HashMap<>();
+            HashMap<String, Object> accountMap = account.toHashMap();
+
+            Object idAccount = accountMap.get("id_account");
+
+            StringBuilder nameBuilder = new StringBuilder();
+            nameBuilder.append("Account ID: ").append(idAccount);
+
+            option.put("id", idAccount);
+            option.put("name", nameBuilder.toString());
+
+            optionsList.add(option);
+        }
+
+        return optionsList;
+    }
+
 
     public List<HashMap<String, Object>> transformAccountListToOptions(List<Account> accountList) {
         List<HashMap<String, Object>> optionsList = new ArrayList<>();

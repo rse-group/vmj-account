@@ -1,0 +1,7 @@
+{
+	"BankAccount":["accountpl.account.core"],
+	"DailyLimit":["accountpl.account.dailylimit"],
+	"Interest":["accountpl.account.interest"],
+	"Overdraft":["accountpl.account.overdraft"],
+	"CreditWorthiness":["accountpl.account.creditworthiness"]
+}

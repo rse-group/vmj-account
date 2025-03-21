@@ -1,0 +1,11 @@
+namespace accountwinvmjcomp
+
+features
+	BankAccount	
+		optional
+			Overdraft
+			Interest	
+				optional
+					InterestEstimation
+			CreditWorthiness
+			DailyLimit

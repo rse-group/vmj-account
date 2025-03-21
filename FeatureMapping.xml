@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<featuremap>
+    <feature
+        menulabel="Account Data"
+        menupath="/account"
+        routename="accountRoutes"
+        routefilepath="account/routes"
+        name="Account"
+    />
+    
+    <feature
+        menulabel="Account Overdraft"
+        menupath="/overdraft"
+        routename="overdraftRoutes"
+        routefilepath="overdraft/routes"
+        name="Overdraft"
+    />
+    
+    <feature
+        menulabel="Info Organisasi"
+        menupath="#"
+        routename=""
+        routefilepath=""
+        name="OrganizationInfo"
+    />
+    <feature
+        menulabel="Tentang Kami"
+        menupath="/about"
+        routename="staticPageRoutes"
+        routefilepath="staticPage/routes"
+        name="AboutUs"
+    />
+    <feature
+        menulabel="Kontak"
+        menupath="/contact"
+        routename="staticPageRoutes"
+        routefilepath="staticPage/routes"
+        name="Contacts"
+    />
+    <feature
+        menulabel="Mitra Kami"
+        menupath="/partners"
+        routename="staticPageRoutes"
+        routefilepath="staticPage/routes"
+        name="Partners"
+    />
+    <feature
+        menulabel="Lokasi"
+        menupath="/maps"
+        routename="staticPageRoutes"
+        routefilepath="staticPage/routes"
+        name="Location"
+    />
+    <feature
+        menulabel="Rekening Donasi"
+        menupath="/bank-account"
+        routename="staticPageRoutes"
+        routefilepath="staticPage/routes"
+        name="BankAccount"
+    />
+</featuremap>

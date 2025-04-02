@@ -53,7 +53,7 @@ public class AccountImpl extends AccountDecorator {
 
     public HashMap<String, Object> toHashMap() {
         HashMap<String, Object> accountMap = record.toHashMap();
-        accountMap.put("id_account", getId_account());
+        accountMap.put("id_account", id_account);
         accountMap.put("overdraft_limit", getOverdraft_limit());
         return accountMap;
     }

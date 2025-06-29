@@ -66,7 +66,7 @@ public abstract class AccountResourceDecorator extends AccountResourceComponent{
 		return record.updateBalance(vmjExchange);
 	}
     
-    public HashMap<String, Object> withdrawAccount(VMJExchange vmjExchange){
+    public HashMap<String, Object> transferAccount(VMJExchange vmjExchange){
     	return record.transferAccount(vmjExchange);
     }
 }

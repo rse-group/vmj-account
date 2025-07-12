@@ -36,9 +36,26 @@ public abstract class AccountResourceDecorator extends AccountResourceComponent{
     public List<HashMap<String,Object>> getAllAccount(VMJExchange vmjExchange){
 		return record.getAllAccount(vmjExchange);
 	}
+    
+    public List<HashMap<String,Object>> getAllAccountOptions(VMJExchange vmjExchange){
+		return record.getAllAccountOptions(vmjExchange);
+	}
+    
+    public List<HashMap<String,Object>> getAllAccountIdOptions(VMJExchange vmjExchange){
+		return record.getAllAccountIdOptions(vmjExchange);
+	}
+
 
     public List<HashMap<String,Object>> transformAccountListToHashMap(List<Account> accountList){
 		return record.transformAccountListToHashMap(accountList);
+	}
+    
+    public List<HashMap<String,Object>> transformAccountListToIdOptions(List<Account> accountList){
+		return record.transformAccountListToIdOptions(accountList);
+	}
+    
+    public List<HashMap<String,Object>> transformAccountListToOptions(List<Account> accountList){
+		return record.transformAccountListToOptions(accountList);
 	}
 
     public List<HashMap<String,Object>> deleteAccount(VMJExchange vmjExchange){
@@ -46,6 +63,10 @@ public abstract class AccountResourceDecorator extends AccountResourceComponent{
 	}
     
     public HashMap<String, Object> updateBalance(VMJExchange vmjExchange){
-		return record.updateAccount(vmjExchange);
+		return record.updateBalance(vmjExchange);
 	}
+    
+    public HashMap<String, Object> withdrawAccount(VMJExchange vmjExchange){
+    	return record.transferAccount(vmjExchange);
+    }
 }

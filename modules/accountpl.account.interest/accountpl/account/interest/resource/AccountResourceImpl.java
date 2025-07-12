@@ -3,7 +3,7 @@ import java.util.*;
 
 import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
-import prices.auth.vmj.annotations.Restricted;
+import vmj.auth.annotations.Restricted;
 
 import accountpl.account.core.AccountResourceDecorator;
 import accountpl.account.core.AccountResourceComponent;
